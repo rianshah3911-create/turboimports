@@ -1,0 +1,2308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Turbo Imports Kenya – Premium Aftermarket Auto Parts</title>
+<meta name="description" content="Kenya's premier aftermarket auto parts importer. JDM, European & performance parts delivered nationwide.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Syne+Mono&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════════
+   TOKENS & RESET
+═══════════════════════════════════════════════ */
+:root {
+  --red: #D4001F;
+  --red-vivid: #FF0028;
+  --red-dim: rgba(212,0,31,0.12);
+  --red-glow: rgba(212,0,31,0.25);
+  --black: #080808;
+  --ink: #111113;
+  --slate: #1A1A1D;
+  --panel: #222226;
+  --line: rgba(255,255,255,0.07);
+  --muted: rgba(255,255,255,0.38);
+  --silver: rgba(255,255,255,0.65);
+  --white: #FFFFFF;
+  --cream: #F7F4F0;
+  --font-head: 'Syne', sans-serif;
+  --font-mono: 'Syne Mono', monospace;
+  --font-body: 'DM Sans', sans-serif;
+  --nav-h: 76px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-in: cubic-bezier(0.55, 0, 1, 0.45);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--font-body);
+  background: var(--black);
+  color: var(--white);
+  overflow-x: hidden;
+  line-height: 1.5;
+  cursor: none;
+}
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; }
+button { cursor: none; border: none; background: none; font-family: inherit; }
+ul { list-style: none; }
+
+/* ═══════════════════════════════════════════════
+   CUSTOM CURSOR
+═══════════════════════════════════════════════ */
+.cursor {
+  position: fixed; width: 10px; height: 10px;
+  background: var(--red-vivid); border-radius: 50%;
+  pointer-events: none; z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s var(--ease), height 0.2s var(--ease), background 0.2s;
+  mix-blend-mode: difference;
+}
+.cursor-ring {
+  position: fixed; width: 36px; height: 36px;
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 50%; pointer-events: none; z-index: 99998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.12s var(--ease), width 0.3s var(--ease), height 0.3s var(--ease), border-color 0.2s;
+}
+.cursor.hover { width: 20px; height: 20px; }
+.cursor-ring.hover { width: 60px; height: 60px; border-color: var(--red-vivid); }
+
+/* ═══════════════════════════════════════════════
+   PAGE SYSTEM
+═══════════════════════════════════════════════ */
+.page { display: none; animation: pageFade 0.5s var(--ease) both; }
+.page.active { display: block; }
+@keyframes pageFade { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+/* ═══════════════════════════════════════════════
+   NAVBAR
+═══════════════════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  height: var(--nav-h);
+  display: flex; align-items: center;
+  padding: 0 48px;
+  background: var(--black);
+  border-bottom: 1px solid var(--line);
+}
+nav.scrolled {
+  background: var(--black);
+  border-bottom: 1px solid var(--line);
+}
+.nav-logo {
+  display: flex; align-items: center;
+  cursor: none;
+  flex-shrink: 0;
+}
+.nav-logo img {
+  height: 44px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  transition: opacity 0.2s;
+}
+.nav-logo:hover img { opacity: 0.85; }
+
+.nav-links {
+  display: flex; align-items: center; gap: 4px;
+  margin-left: auto; margin-right: 32px;
+}
+.nav-links a {
+  font-family: var(--font-head); font-weight: 600; font-size: 0.78rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--muted); padding: 8px 16px; border-radius: 4px;
+  transition: color 0.2s, background 0.2s;
+  cursor: none;
+}
+.nav-links a:hover { color: var(--white); background: rgba(255,255,255,0.06); }
+.nav-links a.active { color: var(--white); }
+
+.nav-cta {
+  font-family: var(--font-head); font-weight: 700; font-size: 0.78rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 10px 22px; border-radius: 4px;
+  background: var(--red); color: white;
+  border: 1px solid var(--red);
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  cursor: none;
+  white-space: nowrap;
+}
+.nav-cta:hover {
+  background: var(--red-vivid);
+  box-shadow: 0 0 32px var(--red-glow), 0 0 0 1px var(--red-vivid);
+  transform: translateY(-1px);
+}
+
+.hamburger {
+  display: none; flex-direction: column; gap: 5px; padding: 8px;
+  cursor: none; margin-left: auto;
+}
+.hamburger span {
+  width: 24px; height: 1.5px; background: var(--white);
+  border-radius: 1px; transition: all 0.3s var(--ease); display: block;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+.mobile-menu {
+  position: fixed; top: var(--nav-h); left: 0; right: 0; bottom: 0;
+  background: var(--ink); z-index: 999; padding: 40px 48px;
+  transform: translateX(-100%); opacity: 0; pointer-events: none;
+  transition: all 0.4s var(--ease);
+}
+.mobile-menu.open { transform: translateX(0); opacity: 1; pointer-events: all; }
+.mobile-menu a {
+  display: block; padding: 20px 0;
+  font-family: var(--font-head); font-weight: 700; font-size: 2rem;
+  letter-spacing: 0.02em;
+  color: var(--silver); border-bottom: 1px solid var(--line);
+  transition: color 0.2s, padding-left 0.2s;
+}
+.mobile-menu a:hover { color: var(--white); padding-left: 12px; }
+.mobile-menu a.wa-link { color: #25D366; border-bottom: none; margin-top: 16px; }
+
+/* ═══════════════════════════════════════════════
+   BUTTONS
+═══════════════════════════════════════════════ */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-head); font-weight: 700; font-size: 0.82rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 14px 30px; border-radius: 4px;
+  transition: all 0.25s var(--ease); cursor: none;
+  border: none; position: relative; overflow: hidden;
+}
+.btn::after {
+  content: ''; position: absolute; inset: 0;
+  background: rgba(255,255,255,0.08);
+  opacity: 0; transition: opacity 0.2s;
+}
+.btn:hover::after { opacity: 1; }
+.btn-primary {
+  background: var(--red); color: white;
+}
+.btn-primary:hover {
+  background: var(--red-vivid);
+  box-shadow: 0 0 48px var(--red-glow), 0 4px 20px rgba(0,0,0,0.4);
+  transform: translateY(-2px);
+}
+.btn-ghost {
+  background: transparent; color: var(--white);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.btn-ghost:hover {
+  border-color: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.05);
+  transform: translateY(-2px);
+}
+.btn-wa {
+  background: #1FAD55; color: white;
+}
+.btn-wa:hover {
+  background: #25D366;
+  box-shadow: 0 0 40px rgba(37,211,102,0.35);
+  transform: translateY(-2px);
+}
+.btn-lg { padding: 17px 38px; font-size: 0.88rem; }
+
+/* ═══════════════════════════════════════════════
+   SECTION UTILITIES
+═══════════════════════════════════════════════ */
+.container { max-width: 1320px; margin: 0 auto; padding: 0 48px; }
+.section { padding: 120px 0; }
+
+.eyebrow {
+  font-family: var(--font-mono); font-size: 0.7rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--red); display: flex; align-items: center; gap: 14px;
+  margin-bottom: 18px;
+}
+.eyebrow::before { content: '//'; color: var(--red); opacity: 0.5; }
+
+.heading {
+  font-family: var(--font-head); font-weight: 800;
+  line-height: 0.96; letter-spacing: -0.02em;
+  color: var(--white);
+}
+.heading-xl { font-size: clamp(3rem, 5.5vw, 6rem); }
+.heading-lg { font-size: clamp(2.2rem, 3.5vw, 4rem); }
+.heading-md { font-size: clamp(1.6rem, 2.5vw, 2.8rem); }
+.heading span { color: var(--red); }
+.heading .stroke {
+  -webkit-text-stroke: 1px rgba(255,255,255,0.3);
+  color: transparent;
+}
+
+.body-text {
+  font-size: 1rem; color: var(--muted); line-height: 1.75;
+  font-weight: 300; max-width: 560px;
+}
+
+/* ═══════════════════════════════════════════════
+   REVEAL ANIMATIONS
+═══════════════════════════════════════════════ */
+.reveal {
+  opacity: 0; transform: translateY(40px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-left {
+  opacity: 0; transform: translateX(-40px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+.reveal-left.visible { opacity: 1; transform: none; }
+.reveal-right {
+  opacity: 0; transform: translateX(40px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+.reveal-right.visible { opacity: 1; transform: none; }
+.d1 { transition-delay: 0.1s; }
+.d2 { transition-delay: 0.2s; }
+.d3 { transition-delay: 0.3s; }
+.d4 { transition-delay: 0.4s; }
+.d5 { transition-delay: 0.5s; }
+
+/* ═══════════════════════════════════════════════
+   LOADING SCREEN
+═══════════════════════════════════════════════ */
+#loader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--black);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 0;
+  transition: opacity 0.7s var(--ease), visibility 0.7s;
+}
+#loader.hidden { opacity: 0; visibility: hidden; }
+.loader-logo {
+  width: 180px;
+  animation: loaderPulse 1.5s ease-in-out infinite;
+}
+.loader-logo img { width: 100%; height: auto; }
+@keyframes loaderPulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(0.97); }
+}
+.loader-line {
+  width: 160px; height: 1px; background: var(--line);
+  margin-top: 36px; overflow: hidden; border-radius: 1px;
+}
+.loader-fill {
+  height: 100%; background: var(--red);
+  animation: loaderFill 1.4s var(--ease) forwards;
+}
+@keyframes loaderFill { from { width: 0; } to { width: 100%; } }
+.loader-label {
+  font-family: var(--font-mono); font-size: 0.65rem;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--muted); margin-top: 20px;
+  animation: loaderFlicker 2s infinite;
+}
+@keyframes loaderFlicker {
+  0%,100%{opacity:0.4} 50%{opacity:0.8}
+}
+
+/* ═══════════════════════════════════════════════
+   STICKY WHATSAPP
+═══════════════════════════════════════════════ */
+.wa-float {
+  position: fixed; bottom: 32px; right: 32px; z-index: 900;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: #1FAD55;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 32px rgba(31,173,85,0.45);
+  animation: wa-breathe 3s ease-in-out infinite;
+  transition: transform 0.2s var(--ease-back);
+  cursor: none;
+}
+.wa-float:hover { transform: scale(1.14); }
+.wa-float svg { fill: white; width: 26px; height: 26px; }
+@keyframes wa-breathe {
+  0%,100% { box-shadow: 0 8px 32px rgba(31,173,85,0.45); }
+  50% { box-shadow: 0 8px 48px rgba(31,173,85,0.7), 0 0 0 12px rgba(31,173,85,0.08); }
+}
+
+/* ═══════════════════════════════════════════════
+   HOME — BANNER HERO
+═══════════════════════════════════════════════ */
+.hero-banner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: var(--black);
+  margin-top: var(--nav-h);
+}
+.hero-banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  transform: scale(1.03);
+  animation: heroZoom 14s ease-out forwards;
+}
+.hero-banner .banner-desktop { display: block; }
+.hero-banner .banner-mobile  { display: none; }
+@media (max-width: 768px) {
+  .hero-banner .banner-desktop { display: none; }
+  .hero-banner .banner-mobile  { display: block; }
+}
+@keyframes heroZoom {
+  from { transform: scale(1.03); }
+  to { transform: scale(1); }
+}
+
+/* ═══════════════════════════════════════════════
+   HOME — MARQUEE STRIP
+═══════════════════════════════════════════════ */
+.marquee-strip {
+  background: var(--red); overflow: hidden;
+  padding: 14px 0;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.marquee-track {
+  display: flex; gap: 0;
+  animation: marquee 30s linear infinite;
+  width: max-content;
+}
+.marquee-track:hover { animation-play-state: paused; }
+.marquee-item {
+  font-family: var(--font-mono); font-size: 0.7rem;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: white; padding: 0 28px;
+  display: flex; align-items: center; gap: 28px;
+  white-space: nowrap;
+}
+.marquee-item::after {
+  content: '✦'; opacity: 0.5; font-size: 0.5rem;
+}
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ═══════════════════════════════════════════════
+   HOME — INTRO SECTION (TEXT STACKED, IMAGES BELOW)
+═══════════════════════════════════════════════ */
+.intro-section {
+  padding: 100px 0 80px;
+  position: relative; overflow: hidden;
+}
+.intro-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+.intro-text-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: flex-end;
+}
+.intro-eyebrow-line {
+  display: flex; align-items: center; gap: 14px;
+  font-family: var(--font-mono); font-size: 0.65rem;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 24px;
+}
+.intro-eyebrow-line::before {
+  content: ''; width: 32px; height: 1px; background: var(--red);
+}
+.intro-heading {
+  font-family: var(--font-head); font-weight: 800;
+  font-size: clamp(2.6rem, 4vw, 4.2rem);
+  line-height: 1.0; letter-spacing: -0.02em;
+  color: var(--white); margin-bottom: 0;
+}
+.intro-heading em {
+  font-style: normal; color: var(--red);
+}
+.intro-right-block {
+  display: flex; flex-direction: column; justify-content: flex-end; gap: 28px;
+}
+.intro-body {
+  font-size: 1rem; color: var(--muted); line-height: 1.8;
+  font-weight: 300;
+}
+/* Parts image strip — 1 row, 5 equal columns */
+.parts-strip {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+.part-img {
+  border-radius: 12px;
+  overflow: hidden;
+  background: transparent;
+  position: relative;
+}
+.part-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  transition: transform 0.5s var(--ease), filter 0.4s;
+  filter: brightness(0.92) saturate(0.9);
+}
+.part-img:hover img {
+  transform: scale(1.04) translateY(-4px);
+  filter: brightness(1) saturate(1.15);
+}
+.part-img-label {
+  position: absolute; bottom: 8px; left: 0; right: 0;
+  text-align: center;
+  font-family: var(--font-mono); font-size: 0.55rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  opacity: 0; transform: translateY(4px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+.part-img:hover .part-img-label { opacity: 1; transform: none; }
+
+/* subtle entrance stagger for parts strip — slide in from right */
+.parts-strip .part-img {
+  opacity: 0;
+  transform: translateX(60px);
+}
+.parts-strip .part-img.strip-visible {
+  animation: stripSlideIn 0.65s var(--ease) forwards;
+}
+.parts-strip .part-img:nth-child(1).strip-visible { animation-delay: 0.05s; }
+.parts-strip .part-img:nth-child(2).strip-visible { animation-delay: 0.18s; }
+.parts-strip .part-img:nth-child(3).strip-visible { animation-delay: 0.31s; }
+.parts-strip .part-img:nth-child(4).strip-visible { animation-delay: 0.44s; }
+.parts-strip .part-img:nth-child(5).strip-visible { animation-delay: 0.57s; }
+@keyframes stripSlideIn {
+  from { opacity: 0; transform: translateX(60px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ═══════════════════════════════════════════════
+   HOME — SHOWCASE CAROUSEL
+═══════════════════════════════════════════════ */
+.carousel-section {
+  padding: 100px 0;
+  border-top: 1px solid var(--line);
+  overflow: hidden;
+}
+.carousel-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+.carousel-track-wrap {
+  position: relative;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+}
+.carousel-track {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  will-change: transform;
+}
+.carousel-slide {
+  flex-shrink: 0;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  cursor: none;
+  transition:
+    opacity 0.55s cubic-bezier(0.25, 1, 0.5, 1),
+    transform 0.55s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.carousel-slide.is-active {
+  opacity: 1;
+  transform: scale(1.18);
+  z-index: 3;
+}
+.carousel-slide.is-near {
+  opacity: 0.55;
+  transform: scale(0.9);
+  z-index: 2;
+}
+.carousel-slide.is-far {
+  opacity: 0.28;
+  transform: scale(0.76);
+  z-index: 1;
+}
+.carousel-slide-img {
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  background: transparent;
+}
+.carousel-slide-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  transition: filter 0.55s ease;
+}
+.carousel-slide.is-active .carousel-slide-img img { filter: brightness(1) saturate(1.1); }
+.carousel-slide.is-near   .carousel-slide-img img { filter: brightness(0.7) saturate(0.75); }
+.carousel-slide.is-far    .carousel-slide-img img { filter: brightness(0.45) saturate(0.5); }
+.carousel-slide-caption {
+  text-align: center;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.45s, transform 0.45s;
+  pointer-events: none;
+}
+.carousel-slide.is-active .carousel-slide-caption {
+  opacity: 1;
+  transform: none;
+}
+.carousel-caption-title {
+  font-family: var(--font-head); font-weight: 700; font-size: 1rem;
+  color: var(--white); margin-bottom: 4px;
+}
+.carousel-caption-sub {
+  font-family: var(--font-mono); font-size: 0.6rem;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--red);
+}
+.carousel-dots {
+  display: flex; justify-content: center; gap: 8px;
+  margin-top: 40px;
+}
+.carousel-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--line); border: 1px solid rgba(255,255,255,0.15);
+  transition: background 0.3s, width 0.3s;
+  cursor: none;
+}
+.carousel-dot.active {
+  background: var(--red);
+  width: 20px;
+  border-radius: 3px;
+  border-color: var(--red);
+}
+
+/* ═══════════════════════════════════════════════
+   HOME — HOW IT WORKS — HORIZONTAL TIMELINE
+═══════════════════════════════════════════════ */
+.process-section {
+  padding: 100px 0;
+  border-top: 1px solid var(--line);
+  overflow: hidden;
+}
+.process-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 72px; flex-wrap: wrap; gap: 24px;
+}
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  position: relative;
+}
+/* connecting line */
+.process-steps::before {
+  content: '';
+  position: absolute;
+  top: 32px; left: calc(12.5% + 16px); right: calc(12.5% + 16px);
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--red), var(--red), var(--red), transparent);
+  opacity: 0.3;
+}
+.process-step {
+  padding: 0 28px 40px;
+  position: relative;
+  transition: background 0.3s;
+}
+/* step circle dot */
+.process-step::before {
+  content: '';
+  display: block;
+  width: 10px; height: 10px;
+  border: 2px solid var(--red);
+  border-radius: 50%;
+  background: var(--black);
+  margin: 0 auto 36px;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.process-step:hover::before {
+  background: var(--red);
+  box-shadow: 0 0 20px var(--red-glow);
+}
+.process-step-num {
+  font-family: var(--font-mono); font-size: 0.62rem;
+  letter-spacing: 0.2em; color: var(--red);
+  display: block; margin-bottom: 14px; text-align: center;
+}
+.process-step-title {
+  font-family: var(--font-head); font-weight: 700; font-size: 1rem;
+  margin-bottom: 10px; color: var(--white); text-align: center;
+  transition: color 0.2s;
+}
+.process-step:hover .process-step-title { color: var(--red); }
+.process-step-desc {
+  font-size: 0.82rem; color: var(--muted); line-height: 1.7; text-align: center;
+}
+.process-step-line { display: none; }
+.process-step-icon { display: none; }
+
+/* ═══════════════════════════════════════════════
+   HOME — WHY US — EDITORIAL FULL-BLEED LAYOUT
+═══════════════════════════════════════════════ */
+.why-section {
+  padding: 100px 0 80px;
+  border-top: 1px solid var(--line);
+  overflow: hidden;
+}
+.why-section::after { display: none; }
+.why-header {
+  margin-bottom: 72px;
+}
+.why-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.why-image-col {
+  position: relative; overflow: hidden;
+  min-height: 560px;
+}
+.why-image-col img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.8s var(--ease);
+  filter: brightness(0.7) saturate(0.8);
+}
+.why-split:hover .why-image-col img {
+  transform: scale(1.04);
+}
+.why-image-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(212,0,31,0.3) 0%, transparent 60%),
+              linear-gradient(to top, rgba(8,8,8,0.85) 0%, transparent 50%);
+}
+.why-image-caption {
+  position: absolute; bottom: 32px; left: 32px;
+  font-family: var(--font-head); font-weight: 800;
+  font-size: 3.2rem; line-height: 1; letter-spacing: -0.02em;
+  color: white; text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+}
+.why-image-caption em { font-style: normal; color: var(--red); display: block; }
+.why-list-col {
+  background: var(--ink);
+  display: flex; flex-direction: column;
+}
+.why-item {
+  padding: 32px 40px;
+  border-bottom: 1px solid var(--line);
+  display: flex; gap: 24px; align-items: flex-start;
+  transition: background 0.25s;
+  position: relative;
+}
+.why-item:last-child { border-bottom: none; }
+.why-item:hover { background: var(--slate); }
+.why-item::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 3px; background: var(--red);
+  transform: scaleY(0); transform-origin: top;
+  transition: transform 0.3s var(--ease);
+}
+.why-item:hover::before { transform: scaleY(1); }
+.why-item-num {
+  font-family: var(--font-mono); font-size: 0.6rem;
+  letter-spacing: 0.2em; color: var(--red);
+  flex-shrink: 0; padding-top: 4px; min-width: 30px;
+}
+.why-item-body {}
+.why-item-title {
+  font-family: var(--font-head); font-weight: 700; font-size: 0.95rem;
+  color: var(--white); margin-bottom: 6px;
+}
+.why-item-desc {
+  font-size: 0.82rem; color: var(--muted); line-height: 1.65;
+}
+.why-grid { display: none; }
+.why-card { display: none; }
+
+/* ═══════════════════════════════════════════════
+   HOME — TESTIMONIALS
+═══════════════════════════════════════════════ */
+.testi-section {
+  padding: 120px 0;
+  border-top: 1px solid var(--line);
+  background: var(--slate);
+}
+.testi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 64px;
+}
+.testi-card {
+  padding: 36px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  transition: transform 0.3s var(--ease), border-color 0.3s;
+}
+.testi-card:hover { transform: translateY(-5px); border-color: rgba(212,0,31,0.3); }
+.testi-stars {
+  font-size: 0.75rem; color: #FFB800; letter-spacing: 0.2em;
+  margin-bottom: 20px;
+}
+.testi-quote {
+  font-size: 0.92rem; color: var(--silver); line-height: 1.75;
+  font-style: italic; margin-bottom: 28px;
+}
+.testi-author { display: flex; align-items: center; gap: 14px; }
+.testi-avatar {
+  width: 42px; height: 42px; border-radius: 50%;
+  border: 1px solid var(--red-dim); flex-shrink: 0;
+  overflow: hidden; display: flex; align-items: center; justify-content: center;
+}
+.testi-name {
+  font-family: var(--font-head); font-weight: 700; font-size: 0.88rem;
+  color: var(--white);
+}
+.testi-car { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+.testi-verified {
+  margin-left: auto; font-family: var(--font-mono); font-size: 0.62rem;
+  color: #25D366; letter-spacing: 0.15em;
+}
+
+/* ═══════════════════════════════════════════════
+   HOME — CTA BANNER
+═══════════════════════════════════════════════ */
+.cta-section {
+  padding: 120px 0;
+  border-top: 1px solid var(--line);
+  position: relative; overflow: hidden;
+}
+.cta-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 800px 500px at 20% 50%, rgba(212,0,31,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-inner {
+  display: flex; align-items: center;
+  justify-content: space-between; gap: 60px; flex-wrap: wrap;
+}
+.cta-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+/* ═══════════════════════════════════════════════
+   HOME — INSTAGRAM
+═══════════════════════════════════════════════ */
+.insta-section {
+  padding: 80px 0;
+  border-top: 1px solid var(--line);
+  overflow: hidden;
+}
+.insta-header { padding-bottom: 48px; }
+.insta-handle {
+  font-family: var(--font-mono); font-size: 0.72rem;
+  letter-spacing: 0.2em; color: var(--red); margin-top: 10px;
+}
+.insta-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+/* Reels row — 2 tall portrait cards side by side */
+.insta-reels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.insta-reel-item {
+  display: block;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: none;
+  position: relative;
+}
+.insta-reel-img {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+}
+.insta-reel-img img {
+  width: 100%;
+  aspect-ratio: 9/16;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s var(--ease), filter 0.3s;
+  filter: brightness(0.88) saturate(0.9);
+}
+.insta-reel-item:hover .insta-reel-img img {
+  transform: scale(1.04);
+  filter: brightness(1) saturate(1.1);
+}
+.insta-reel-overlay {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 12px;
+  background: rgba(0,0,0,0.25);
+  transition: background 0.3s;
+}
+.insta-reel-item:hover .insta-reel-overlay {
+  background: rgba(212,0,31,0.35);
+}
+.insta-play {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: 2px solid rgba(255,255,255,0.7);
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(4px);
+  transition: transform 0.2s var(--ease), background 0.2s;
+}
+.insta-reel-item:hover .insta-play {
+  transform: scale(1.12);
+  background: rgba(255,255,255,0.25);
+}
+.insta-play svg { width: 20px; height: 20px; margin-left: 3px; }
+.insta-reel-badge {
+  display: flex; align-items: center; gap: 5px;
+  font-family: var(--font-mono); font-size: 0.62rem;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: white; opacity: 0.85;
+}
+/* Posts row — 2 square posts side by side */
+.insta-posts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.insta-post-item {
+  display: block;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: none;
+  position: relative;
+}
+.insta-post-item img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s var(--ease), filter 0.3s;
+  filter: brightness(0.88) saturate(0.9);
+}
+.insta-post-item:hover img {
+  transform: scale(1.04);
+  filter: brightness(1) saturate(1.1);
+}
+.insta-post-overlay {
+  position: absolute; inset: 0;
+  background: rgba(212,0,31,0.7);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+  border-radius: 12px;
+}
+.insta-post-item:hover .insta-post-overlay { opacity: 1; }
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+footer {
+  background: var(--ink);
+  border-top: 1px solid var(--line);
+  padding: 80px 48px 36px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 60px;
+  margin-bottom: 64px;
+}
+.footer-logo img {
+  height: 52px; width: auto; object-fit: contain;
+  margin-bottom: 20px;
+}
+.footer-desc {
+  font-size: 0.85rem; color: var(--muted); line-height: 1.75;
+  max-width: 300px;
+}
+.footer-socials { display: flex; gap: 10px; margin-top: 24px; }
+.footer-social {
+  width: 36px; height: 36px; border-radius: 4px;
+  border: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--muted); cursor: none;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.footer-social:hover { border-color: var(--red); color: var(--white); background: var(--red-dim); }
+.footer-col-title {
+  font-family: var(--font-mono); font-weight: 400; font-size: 0.65rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 24px;
+}
+.footer-links { display: flex; flex-direction: column; gap: 14px; }
+.footer-links a {
+  font-size: 0.85rem; color: var(--silver); cursor: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--white); }
+.footer-contact-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 0.85rem; color: var(--silver); margin-bottom: 14px;
+}
+.footer-contact-item svg {
+  stroke: var(--red); fill: none; width: 14px; height: 14px;
+  flex-shrink: 0; margin-top: 3px;
+}
+.footer-bottom {
+  border-top: 1px solid var(--line); padding-top: 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px;
+  font-family: var(--font-mono); font-size: 0.62rem;
+  letter-spacing: 0.1em; color: var(--muted);
+}
+.footer-bottom a { color: var(--red); cursor: none; }
+
+/* ═══════════════════════════════════════════════
+   IMPORT PAGE
+═══════════════════════════════════════════════ */
+.import-hero {
+  background: var(--ink);
+  padding: calc(var(--nav-h) + 80px) 48px 80px;
+  position: relative; overflow: hidden;
+}
+.import-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: url('https://images.unsplash.com/photo-1632823469850-2f77dd9c7f93?w=1400&q=50') center/cover;
+  opacity: 0.06;
+}
+.import-hero-content { position: relative; z-index: 2; max-width: 700px; }
+.import-form-wrap { max-width: 860px; margin: 0 auto; padding: 64px 48px; }
+.import-form {
+  background: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 12px; overflow: hidden;
+}
+.import-form-header {
+  padding: 32px 40px;
+  border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; gap: 16px;
+  background: rgba(212,0,31,0.08);
+}
+.import-form-header svg { stroke: var(--red); fill: none; width: 26px; height: 26px; }
+.import-form-header h2 {
+  font-family: var(--font-head); font-weight: 700; font-size: 1.3rem;
+  color: var(--white);
+}
+.import-form-header p { font-size: 0.82rem; color: var(--muted); margin-top: 2px; }
+.import-form-body { padding: 40px; }
+.form-section-label {
+  font-family: var(--font-mono); font-size: 0.65rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 20px; margin-top: 36px;
+}
+.form-section-label:first-child { margin-top: 0; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.form-group { display: flex; flex-direction: column; gap: 8px; }
+.form-group.full { grid-column: span 2; }
+.form-label {
+  font-family: var(--font-head); font-weight: 600; font-size: 0.72rem;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--silver);
+}
+.form-input, .form-select, .form-textarea {
+  border: 1px solid var(--line); border-radius: 6px;
+  padding: 13px 16px;
+  font-family: var(--font-body); font-size: 0.88rem;
+  color: var(--white); background: rgba(255,255,255,0.04);
+  outline: none; width: 100%;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+.form-input::placeholder { color: rgba(255,255,255,0.2); }
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--red);
+  background: rgba(212,0,31,0.06);
+  box-shadow: 0 0 0 3px rgba(212,0,31,0.1);
+}
+.form-select { cursor: none; }
+.form-select option { background: var(--ink); }
+.form-textarea { resize: vertical; min-height: 110px; line-height: 1.6; }
+.form-upload {
+  border: 1px dashed rgba(255,255,255,0.15);
+  border-radius: 8px; padding: 36px;
+  text-align: center; cursor: none;
+  transition: border-color 0.2s, background 0.2s;
+  margin-top: 8px;
+}
+.form-upload:hover {
+  border-color: var(--red);
+  background: var(--red-dim);
+}
+.form-upload svg { stroke: var(--muted); fill: none; width: 32px; height: 32px; margin: 0 auto 12px; }
+.form-upload p { font-size: 0.82rem; color: var(--muted); }
+.form-upload strong { color: var(--red); }
+.import-form-footer {
+  padding: 0 40px 40px;
+  border-top: 1px solid var(--line);
+  padding-top: 32px;
+}
+
+/* ═══════════════════════════════════════════════
+   ABOUT PAGE
+═══════════════════════════════════════════════ */
+.about-hero {
+  min-height: 55vh;
+  display: flex; align-items: center;
+  padding: calc(var(--nav-h) + 80px) 48px 80px;
+  position: relative; overflow: hidden;
+  background: var(--ink);
+}
+.about-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: url('https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=1600&q=60') center/cover;
+  opacity: 0.08;
+}
+.about-hero-content { position: relative; z-index: 2; max-width: 800px; }
+.about-body { max-width: 1320px; margin: 0 auto; padding: 100px 48px; }
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start;
+}
+.about-img {
+  border-radius: 8px; overflow: hidden; aspect-ratio: 4/5;
+  position: relative;
+  background: var(--slate);
+}
+.about-img-main {
+  width: 100%; height: 100%;
+  background: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&q=80') center/cover;
+  transition: transform 0.6s var(--ease);
+}
+.about-img:hover .about-img-main { transform: scale(1.04); }
+.about-img-badge {
+  position: absolute; bottom: -1px; right: -1px;
+  background: var(--red); color: white; padding: 24px 28px;
+  border-radius: 8px 0 8px 0;
+}
+.about-img-badge-num {
+  font-family: var(--font-head); font-weight: 800; font-size: 2rem;
+  line-height: 1;
+}
+.about-img-badge-label {
+  font-family: var(--font-mono); font-size: 0.6rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  margin-top: 4px; opacity: 0.8;
+}
+.about-text-content .body-text { max-width: 100%; margin-bottom: 20px; }
+.about-divider { width: 40px; height: 1px; background: var(--red); margin: 32px 0; }
+.country-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+.country-tag {
+  font-family: var(--font-mono); font-size: 0.62rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 7px 14px; border: 1px solid var(--line);
+  border-radius: 3px; color: var(--silver);
+  display: flex; align-items: center; gap: 6px;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.country-tag:hover { border-color: var(--red); color: white; background: var(--red-dim); }
+.values-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+  margin-top: 80px;
+}
+.value-card {
+  border: 1px solid var(--line); border-radius: 8px;
+  padding: 32px 24px; text-align: center;
+  background: var(--ink);
+  transition: border-color 0.3s, transform 0.3s;
+}
+.value-card:hover { border-color: rgba(212,0,31,0.4); transform: translateY(-4px); }
+.value-icon { font-size: 2rem; margin-bottom: 16px; }
+.value-title {
+  font-family: var(--font-head); font-weight: 700; font-size: 0.95rem;
+  color: var(--white); margin-bottom: 10px;
+}
+.value-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
+
+/* ═══════════════════════════════════════════════
+   SERVICES PAGE
+═══════════════════════════════════════════════ */
+.services-hero {
+  padding: calc(var(--nav-h) + 80px) 48px 80px;
+  background: var(--ink);
+  position: relative; overflow: hidden;
+}
+.services-body { max-width: 1320px; margin: 0 auto; padding: 80px 48px; }
+.services-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+.service-card {
+  border: 1px solid var(--line); border-radius: 8px;
+  overflow: hidden; background: var(--ink);
+  transition: border-color 0.3s, transform 0.3s var(--ease);
+}
+.service-card:hover { border-color: rgba(212,0,31,0.4); transform: translateY(-6px); }
+.service-card-img {
+  height: 200px; background-size: cover; background-position: center;
+  position: relative;
+}
+.service-card-img::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 30%, rgba(8,8,8,0.8) 100%);
+}
+.service-card-body { padding: 32px; }
+.service-icon {
+  width: 46px; height: 46px; border: 1px solid var(--line);
+  border-radius: 6px; display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px;
+  transition: border-color 0.3s, background 0.3s;
+}
+.service-card:hover .service-icon { border-color: var(--red); background: var(--red-dim); }
+.service-icon svg { stroke: var(--muted); fill: none; width: 20px; height: 20px; transition: stroke 0.3s; }
+.service-card:hover .service-icon svg { stroke: var(--red); }
+.service-title {
+  font-family: var(--font-head); font-weight: 700; font-size: 1.05rem;
+  color: var(--white); margin-bottom: 12px;
+}
+.service-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.7; margin-bottom: 24px; }
+
+/* ═══════════════════════════════════════════════
+   CONTACT PAGE
+═══════════════════════════════════════════════ */
+.contact-layout {
+  max-width: 1320px; margin: 0 auto;
+  padding: calc(var(--nav-h) + 80px) 48px 100px;
+  display: grid; grid-template-columns: 1fr 1.5fr; gap: 80px; align-items: start;
+}
+.contact-info {}
+.contact-card {
+  display: flex; gap: 16px; padding: 20px;
+  border: 1px solid var(--line); border-radius: 8px;
+  background: var(--ink); margin-bottom: 16px;
+  transition: border-color 0.2s;
+}
+.contact-card:hover { border-color: rgba(212,0,31,0.3); }
+.contact-card-icon {
+  width: 42px; height: 42px; border: 1px solid var(--line);
+  border-radius: 6px; display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.contact-card-icon svg { stroke: var(--red); fill: none; width: 18px; height: 18px; }
+.contact-card-title { font-family: var(--font-head); font-weight: 700; font-size: 0.85rem; margin-bottom: 4px; }
+.contact-card-val { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+.hours-card {
+  border: 1px solid var(--line); border-radius: 8px;
+  padding: 24px; background: var(--ink); margin-bottom: 24px;
+}
+.hours-title {
+  font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--red); margin-bottom: 18px;
+}
+.hours-row {
+  display: flex; justify-content: space-between; padding: 9px 0;
+  border-bottom: 1px solid var(--line); font-size: 0.82rem;
+}
+.hours-row:last-child { border-bottom: none; }
+.hours-row span:first-child { color: var(--muted); }
+.hours-row span:last-child { color: var(--white); font-weight: 600; }
+.contact-form-card {
+  border: 1px solid var(--line); border-radius: 12px;
+  padding: 44px; background: var(--ink);
+}
+.contact-form-title {
+  font-family: var(--font-head); font-weight: 800; font-size: 1.3rem;
+  margin-bottom: 32px; color: var(--white);
+}
+.contact-form-inner { display: flex; flex-direction: column; gap: 18px; }
+.map-section { max-width: 1320px; margin: 0 auto; padding: 0 48px 100px; }
+.map-placeholder {
+  border-radius: 12px; overflow: hidden; height: 380px;
+  border: 1px solid var(--line); background: var(--ink);
+  display: flex; align-items: center; justify-content: center;
+}
+.map-inner {
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.map-pin { font-size: 3rem; }
+.map-label { font-family: var(--font-head); font-weight: 700; font-size: 1.1rem; color: var(--white); }
+.map-sublabel { font-size: 0.82rem; color: var(--muted); }
+
+/* ═══════════════════════════════════════════════
+   HOME - FITMENT SECTION
+═══════════════════════════════════════════════ */
+.fitment-section {
+  padding: 64px 0;
+  border-top: 1px solid var(--line);
+  overflow: hidden;
+}
+.fitment-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.fitment-img-col {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.fitment-img-col img {
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+  transition: transform 0.7s var(--ease);
+}
+.fitment-img-col:hover img { transform: scale(1.03); }
+.fitment-img-col::after {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(212,0,31,0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+.fitment-text-col { display: flex; flex-direction: column; gap: 28px; }
+.fitment-perks {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.fitment-perk {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--ink);
+  transition: border-color 0.25s, background 0.25s, transform 0.2s var(--ease);
+}
+.fitment-perk:hover {
+  border-color: rgba(212,0,31,0.35);
+  background: var(--slate);
+  transform: translateX(4px);
+}
+.fitment-perk-icon {
+  width: 38px; height: 38px; flex-shrink: 0;
+  border-radius: 8px;
+  background: var(--red-dim);
+  border: 1px solid rgba(212,0,31,0.2);
+  display: flex; align-items: center; justify-content: center;
+}
+.fitment-perk-icon svg {
+  stroke: var(--red); fill: none;
+  width: 17px; height: 17px;
+}
+.fitment-perk-title {
+  font-family: var(--font-head); font-weight: 700; font-size: 0.88rem;
+  color: var(--white);
+}
+
+/* ═══════════════════════════════════════════════
+   MOBILE GENERAL IMPROVEMENTS
+═══════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .intro-text-block {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .intro-right-block { justify-content: flex-start; }
+  .intro-section { padding: 60px 0 48px; }
+  .parts-strip { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .parts-strip .part-img:nth-child(4),
+  .parts-strip .part-img:nth-child(5) { display: block; }
+  .insta-reels { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .carousel-section { padding: 64px 0; }
+  .carousel-slide { width: 220px; }
+  .process-section { padding: 64px 0; }
+  .fitment-section { padding: 48px 0; }
+  .fitment-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .fitment-img-col img { height: 280px; }
+  .insta-section { padding: 48px 0; }
+  .testi-section { padding: 64px 0; }
+  .cta-section { padding: 64px 0; }
+  .section { padding: 64px 0; }
+  footer { padding: 48px 20px 28px; }
+  .why-section { padding: 64px 0 48px; }
+}
+@media (max-width: 480px) {
+  .parts-strip { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .parts-strip .part-img:nth-child(5) { grid-column: 1 / -1; max-width: 50%; margin: 0 auto; }
+  .intro-heading { font-size: 2rem; }
+  .carousel-slide { width: 180px; }
+  .insta-reels { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .insta-reels .insta-reel-img img { aspect-ratio: 9/16; }
+  .insta-posts { grid-template-columns: 1fr; }
+}
+/* ═══════════════════════════════════════════════
+   NOISE OVERLAY & GRAIN
+═══════════════════════════════════════════════ */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025; pointer-events: none; z-index: 99997;
+  mix-blend-mode: overlay;
+}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════ */
+@media (max-width: 1100px) {
+  .process-steps { grid-template-columns: repeat(2, 1fr); }
+  .process-steps::before { display: none; }
+  .testi-grid { grid-template-columns: repeat(2, 1fr); }
+  .about-grid { grid-template-columns: 1fr; }
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .contact-layout { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .values-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .why-split { grid-template-columns: 1fr; }
+  .why-image-col { min-height: 320px; }
+}
+@media (hover: none) and (pointer: coarse) {
+  body { cursor: auto; }
+  .cursor, .cursor-ring { display: none; }
+  button, a, [role="button"] { cursor: pointer; }
+  .form-select, .form-upload { cursor: pointer; }
+}
+@media (max-width: 768px) {
+  :root { --nav-h: 68px; }
+  nav { padding: 0 20px; }
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+  .container { padding-left: 20px; padding-right: 20px; }
+  .import-form-wrap, .services-body, .about-body { padding-left: 20px; padding-right: 20px; }
+  .carousel-slide { width: 200px; }
+  .process-steps { grid-template-columns: 1fr 1fr; }
+  .process-steps::before { display: none; }
+  .why-split { grid-template-columns: 1fr; }
+  .why-image-col { min-height: 260px; }
+  .why-image-caption { font-size: 2.2rem; }
+  .testi-grid { grid-template-columns: 1fr; }
+  .cta-inner { flex-direction: column; }
+
+  .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+  footer { padding: 60px 20px 28px; }
+  .services-grid { grid-template-columns: 1fr; }
+  .values-grid { grid-template-columns: 1fr 1fr; }
+  .contact-layout { padding: calc(var(--nav-h) + 40px) 20px 60px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .form-group.full { grid-column: span 1; }
+  .mobile-menu { padding: 40px 20px; }
+  .import-hero, .about-hero, .services-hero { padding-left: 20px; padding-right: 20px; }
+  .process-header { flex-direction: column; align-items: flex-start; }
+  .heading-xl { font-size: 2.2rem; }
+  .heading-lg { font-size: 1.8rem; }
+  .intro-heading { font-size: 2.4rem; }
+  .map-section { padding-left: 20px; padding-right: 20px; }
+
+  .cta-actions { flex-direction: column; width: 100%; }
+  .cta-actions .btn { width: 100%; justify-content: center; }
+}
+@media (max-width: 480px) {
+  .parts-strip { grid-template-columns: repeat(2, 1fr); }
+  .parts-strip .part-img:nth-child(4),
+  .parts-strip .part-img:nth-child(5) { display: block; }
+  .values-grid { grid-template-columns: 1fr; }
+
+  .import-form-body, .import-form-footer { padding: 20px; }
+  .import-form-header { padding: 20px; }
+  .contact-form-card { padding: 24px 18px; }
+  .process-steps { grid-template-columns: 1fr; }
+  .why-item { padding: 24px 20px; }
+  .testi-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-logo">
+    <img src="logo5.png" alt="Turbo Imports Kenya">
+  </div>
+  <div class="loader-line"><div class="loader-fill"></div></div>
+  <div class="loader-label">Loading...</div>
+</div>
+
+<!-- STICKY WHATSAPP -->
+<a href="https://wa.me/254718079999?text=Hello%20Turbo%20Imports%20Kenya!%20I'm%20interested%20in%20your%20products." class="wa-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="nav-logo" onclick="showPage('home')" role="button" tabindex="0" aria-label="Home">
+    <img src="logo5.png" alt="Turbo Imports Kenya">
+  </div>
+
+  <div class="nav-links">
+    <a href="#" onclick="showPage('home')" id="nav-home" class="active">Home</a>
+    <a href="#" onclick="showPage('services')" id="nav-services">Services</a>
+    <a href="#" onclick="showPage('about')" id="nav-about">About</a>
+    <a href="#" onclick="showPage('contact')" id="nav-contact">Contact</a>
+  </div>
+
+  <a href="https://wa.me/254718079999?text=Hello%20Turbo%20Imports%20Kenya!%20I'd%20like%20to%20request%20a%20custom%20import." class="nav-cta" target="_blank" rel="noopener">Request Import</a>
+
+  <button class="hamburger" id="hamburger" onclick="toggleMobile()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu" role="dialog">
+  <a href="#" onclick="showPage('home');toggleMobile()">Home</a>
+  <a href="#" onclick="showPage('services');toggleMobile()">Services</a>
+  <a href="#" onclick="showPage('about');toggleMobile()">About</a>
+  <a href="#" onclick="showPage('contact');toggleMobile()">Contact</a>
+  <a href="https://wa.me/254718079999?text=Hello%20Turbo%20Imports%20Kenya!%20I'd%20like%20to%20request%20a%20custom%20import." target="_blank" rel="noopener" onclick="toggleMobile()">Request Import</a>
+  <a href="https://wa.me/254718079999" class="wa-link" target="_blank" rel="noopener">WhatsApp Us →</a>
+</div>
+
+<!-- ══════════════════════════════════════
+     HOME PAGE
+══════════════════════════════════════ -->
+<div class="page active" id="page-home">
+
+  <!-- BANNER — Image only, no text -->
+  <section class="hero-banner">
+    <img class="banner-desktop" src="banner4.png" alt="Turbo Imports Kenya — Premium Aftermarket Parts">
+    <img class="banner-mobile" src="bannermob.png" alt="Turbo Imports Kenya — Premium Aftermarket Parts">
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-strip">
+    <div class="marquee-track" aria-hidden="true">
+      <div class="marquee-item">Genuine JDM Parts</div>
+      <div class="marquee-item">European Performance</div>
+      <div class="marquee-item">Custom Import Service</div>
+      <div class="marquee-item">Nationwide Delivery</div>
+      <div class="marquee-item">Fitment Guarantee</div>
+      <div class="marquee-item">Authentic Only</div>
+      <div class="marquee-item">Nairobi to All 47 Counties</div>
+      <div class="marquee-item">Japan · Germany · USA · UK · Dubai</div>
+      <div class="marquee-item">Genuine JDM Parts</div>
+      <div class="marquee-item">European Performance</div>
+      <div class="marquee-item">Custom Import Service</div>
+      <div class="marquee-item">Nationwide Delivery</div>
+      <div class="marquee-item">Fitment Guarantee</div>
+      <div class="marquee-item">Authentic Only</div>
+      <div class="marquee-item">Nairobi to All 47 Counties</div>
+      <div class="marquee-item">Japan · Germany · USA · UK · Dubai</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <section class="intro-section">
+    <div class="container">
+      <div class="intro-grid">
+        <!-- Top: text left, body+button right -->
+        <div class="intro-text-block">
+          <div>
+            <div class="intro-eyebrow-line reveal">Nairobi's Most Trusted Importer</div>
+            <h2 class="intro-heading reveal d1">The Parts<br>You Want,<br><em>Delivered.</em></h2>
+          </div>
+          <div class="intro-right-block">
+            <p class="intro-body reveal d1">We source genuine aftermarket parts directly from Japan, Germany, the USA, UK, and Dubai — cutting out the middlemen and the fakes. Built by car enthusiasts, for car enthusiasts in Kenya.</p>
+            <div class="reveal d2">
+              <button class="btn btn-primary btn-lg" onclick="window.open('https://wa.me/254718079999?text=Hello%20Turbo%20Imports%20Kenya!%20I%27d%20like%20to%20request%20a%20custom%20import.','_blank')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                Request a Custom Import
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Bottom: 5 images in one row -->
+        <div class="parts-strip">
+          <div class="part-img">
+            <img src="images/image1.png" alt="Aftermarket part">
+            <div class="part-img-label">Rims &amp; Wheels</div>
+          </div>
+          <div class="part-img">
+            <img src="images/image2.png" alt="Brake kit">
+            <div class="part-img-label">Full Exhaust Systems</div>
+          </div>
+          <div class="part-img">
+            <img src="images/image3.png" alt="Suspension">
+            <div class="part-img-label">Brake Kits</div>
+          </div>
+          <div class="part-img">
+            <img src="images/image4.png" alt="Exhaust">
+            <div class="part-img-label">Ambient Lighting AC vents</div>
+          </div>
+          <div class="part-img">
+            <img src="images/image5.png" alt="Body kit">
+            <div class="part-img-label">Suspension and Coilovers</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process-section">
+    <div class="container">
+      <div class="process-header">
+        <div>
+          <div class="eyebrow reveal">How it works</div>
+          <h2 class="heading heading-lg reveal d1">From Request<br>to <span>Doorstep</span></h2>
+        </div>
+        <p class="body-text reveal" style="max-width:320px; text-align:right">A seamless end-to-end experience built around Kenyan car owners.</p>
+      </div>
+      <div class="process-steps">
+        <div class="process-step reveal">
+          <span class="process-step-num">// 01</span>
+          <div class="process-step-title">Browse or Request</div>
+          <div class="process-step-desc">Found it online? Send us the link, photo, or description. We source anything from anywhere.</div>
+        </div>
+        <div class="process-step reveal d1">
+          <span class="process-step-num">// 02</span>
+          <div class="process-step-title">Get a Quote</div>
+          <div class="process-step-desc">We confirm availability, pricing, and compatibility for your exact vehicle. Quote within hours via WhatsApp.</div>
+        </div>
+        <div class="process-step reveal d2">
+          <span class="process-step-num">// 03</span>
+          <div class="process-step-title">Pay & We Import</div>
+          <div class="process-step-desc">Deposit to confirm. We handle procurement, customs clearance, and all logistics from source to Nairobi.</div>
+        </div>
+        <div class="process-step reveal d3">
+          <span class="process-step-num">// 04</span>
+          <div class="process-step-title">Delivered Nationwide</div>
+          <div class="process-step-desc">Pick up in Nairobi or delivered to your door — all 47 counties. Real-time tracking on WhatsApp.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FITMENT SERVICE -->
+  <section class="fitment-section">
+    <div class="container">
+      <div class="fitment-grid">
+
+        <div class="fitment-img-col reveal-left">
+          <img src="images/fitment.png" alt="Professional part fitment in Nairobi">
+        </div>
+
+        <div class="fitment-text-col">
+          <div class="eyebrow reveal">Installation Service</div>
+          <h2 class="heading heading-md reveal d1">We Don't Just Deliver —<br><span>We Fit It Too.</span></h2>
+
+          <div class="fitment-perks">
+            <div class="fitment-perk reveal d1">
+              <div class="fitment-perk-icon">
+                <svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              </div>
+              <div class="fitment-perk-title">Experienced Mechanics</div>
+            </div>
+            <div class="fitment-perk reveal d2">
+              <div class="fitment-perk-icon">
+                <svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              </div>
+              <div class="fitment-perk-title">Guaranteed Fitment</div>
+            </div>
+            <div class="fitment-perk reveal d3">
+              <div class="fitment-perk-icon">
+                <svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div class="fitment-perk-title">Nairobi-Based Workshops</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOWCASE CAROUSEL -->
+  <section class="carousel-section">
+    <div class="carousel-header container reveal">
+      <div class="eyebrow" style="justify-content:center">Our Catalogue</div>
+      <h2 class="heading heading-lg" style="text-align:center">What We <span>Import</span></h2>
+    </div>
+    <div class="carousel-track-wrap">
+      <div class="carousel-track" id="carouselTrack">
+        <div class="carousel-slide" data-index="0">
+          <div class="carousel-slide-img"><img src="images/carousel1.png" alt="Catalogue item 1" loading="lazy"></div>
+          <div class="carousel-slide-caption">
+            <div class="carousel-caption-title">Ambient Lighting AC Vents</div>
+            <div class="carousel-caption-sub"></div>
+          </div>
+        </div>
+        <div class="carousel-slide" data-index="1">
+          <div class="carousel-slide-img"><img src="images/carousel2.png" alt="Catalogue item 2" loading="lazy"></div>
+          <div class="carousel-slide-caption">
+            <div class="carousel-caption-title">Genuine Carbon Parts</div>
+            <div class="carousel-caption-sub"></div>
+          </div>
+        </div>
+        <div class="carousel-slide" data-index="2">
+          <div class="carousel-slide-img"><img src="images/carousel3.png" alt="Catalogue item 3" loading="lazy"></div>
+          <div class="carousel-slide-caption">
+            <div class="carousel-caption-title">OEM rims</div>
+            <div class="carousel-caption-sub"></div>
+          </div>
+        </div>
+        <div class="carousel-slide" data-index="3">
+          <div class="carousel-slide-img"><img src="images/carousel4.png" alt="Catalogue item 4" loading="lazy"></div>
+          <div class="carousel-slide-caption">
+            <div class="carousel-caption-title">Interior Starlights</div>
+            <div class="carousel-caption-sub"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-dots" id="carouselDots">
+      <div class="carousel-dot active" data-dot="0"></div>
+      <div class="carousel-dot" data-dot="1"></div>
+      <div class="carousel-dot" data-dot="2"></div>
+      <div class="carousel-dot" data-dot="3"></div>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM -->
+  <section class="insta-section">
+    <div class="insta-header container">
+      <div class="eyebrow" style="color:rgba(212,0,31,0.6)">Follow Our Builds</div>
+      <h2 class="heading heading-lg">Find Us on <span>Instagram</span></h2>
+      <div class="insta-handle">@TurboImportsKE</div>
+    </div>
+    <div class="insta-feed container">
+      <!-- Reels -->
+      <div class="insta-reels">
+        <a href="https://www.instagram.com/p/DYU8R9joGcd/" target="_blank" rel="noopener" class="insta-reel-item">
+          <div class="insta-reel-img">
+            <img src="images/reel1.png" alt="Instagram Reel 1">
+            <div class="insta-reel-overlay">
+              <div class="insta-play">
+                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" fill="white"/></svg>
+              </div>
+              <div class="insta-reel-badge">
+                <svg viewBox="0 0 24 24" width="12" height="12"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="white" stroke-width="2"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32" fill="none" stroke="white" stroke-width="1.5"/></svg>
+                Reel
+              </div>
+            </div>
+          </div>
+        </a>
+        <a href="https://www.instagram.com/p/DVwD_RwArjw/" target="_blank" rel="noopener" class="insta-reel-item">
+          <div class="insta-reel-img">
+            <img src="images/reel2.png" alt="Instagram Reel 2">
+            <div class="insta-reel-overlay">
+              <div class="insta-play">
+                <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" fill="white"/></svg>
+              </div>
+              <div class="insta-reel-badge">
+                <svg viewBox="0 0 24 24" width="12" height="12"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="white" stroke-width="2"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32" fill="none" stroke="white" stroke-width="1.5"/></svg>
+                Reel
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <!-- Posts -->
+      <div class="insta-posts">
+        <div class="insta-post-item" style="cursor:default">
+          <img src="images/post1.png" alt="Instagram Post 1">
+          <div class="insta-post-overlay">
+            <svg viewBox="0 0 24 24" fill="white" width="24" height="24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </div>
+        </div>
+        <div class="insta-post-item" style="cursor:default">
+          <img src="images/post2.png" alt="Instagram Post 2">
+          <div class="insta-post-overlay">
+            <svg viewBox="0 0 24 24" fill="white" width="24" height="24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testi-section">
+    <div class="container">
+      <div class="eyebrow reveal" style="color:rgba(212,0,31,0.7)">Real Reviews</div>
+      <h2 class="heading heading-lg reveal d1">What Our <span>Customers</span> Say</h2>
+      <div class="testi-grid">
+        <div class="testi-card reveal">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"Sourced a genuine HKS intake and rebuilt IHI turbo from Japan for my STI VAB. Fitment was clean, boost is up — car pulls like a different beast. Asante sana!"</p>
+          <div class="testi-author">
+            <div class="testi-avatar">
+              <svg viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:42px;height:42px;border-radius:50%;background:var(--slate)"><circle cx="21" cy="17" r="7" fill="rgba(212,0,31,0.5)"/><ellipse cx="21" cy="34" rx="12" ry="7" fill="rgba(212,0,31,0.3)"/></svg>
+            </div>
+            <div>
+              <div class="testi-name">Suleiman</div>
+              <div class="testi-car">Subaru WRX STI VAB</div>
+            </div>
+            <div class="testi-verified">✓ Verified</div>
+          </div>
+        </div>
+        <div class="testi-card reveal d1">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"Got genuine Ferodo DS2500s for my RS3 — confirmed spec before shipping, and they even helped me find a Westlands garage for fitment. Perfect stop."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">
+              <svg viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:42px;height:42px;border-radius:50%;background:var(--slate)"><circle cx="21" cy="17" r="7" fill="rgba(212,0,31,0.5)"/><ellipse cx="21" cy="34" rx="12" ry="7" fill="rgba(212,0,31,0.3)"/></svg>
+            </div>
+            <div>
+              <div class="testi-name">George Kingara</div>
+              <div class="testi-car">Audi RS3 8V</div>
+            </div>
+            <div class="testi-verified">✓ Verified</div>
+          </div>
+        </div>
+        <div class="testi-card reveal d2">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"Full Akrapovic exhaust for my E63 S AMG — sourced, shipped, fitted, customs handled end to end. The sound is absolutely mental. Coming back for the downpipes next."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">
+              <svg viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:42px;height:42px;border-radius:50%;background:var(--slate)"><circle cx="21" cy="17" r="7" fill="rgba(212,0,31,0.5)"/><ellipse cx="21" cy="34" rx="12" ry="7" fill="rgba(212,0,31,0.3)"/></svg>
+            </div>
+            <div>
+              <div class="testi-name">Luqmaan</div>
+              <div class="testi-car">Mercedes-AMG E63 S</div>
+            </div>
+            <div class="testi-verified">✓ Verified</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-bg" aria-hidden="true"></div>
+    <div class="container">
+      <div class="cta-inner">
+        <div>
+          <div class="eyebrow reveal" style="color:rgba(212,0,31,0.6)">Custom Import Service</div>
+          <h2 class="heading heading-lg reveal d1">Can't Find What<br>You're <span>Looking For?</span></h2>
+          <p class="body-text reveal d2" style="margin-top:16px">Send us a link, photo, or description. We import from Japan, Germany, UK, USA and Dubai — anything, anywhere.</p>
+        </div>
+        <div class="cta-actions reveal d2">
+          <button class="btn btn-primary btn-lg" onclick="window.open('https://wa.me/254718079999?text=Hello%20Turbo%20Imports%20Kenya!%20I%27d%20like%20to%20request%20a%20custom%20import.','_blank')">Request Import</button>
+          <a href="https://wa.me/254718079999" class="btn btn-wa btn-lg" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp Now
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">
+          <img src="logo5.png" alt="Turbo Imports Kenya">
+        </div>
+        <p class="footer-desc">Kenya's premier aftermarket auto parts importer. We source genuine performance parts from Japan, Germany, USA, UK and Dubai — delivered to your doorstep nationwide.</p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social" aria-label="Instagram">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="#" class="footer-social" aria-label="Facebook">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="https://wa.me/254718079999" class="footer-social" aria-label="WhatsApp">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigation</div>
+        <div class="footer-links">
+          <a href="#" onclick="showPage('home')">Home</a>
+          <a href="#" onclick="showPage('services')">Services</a>
+          <a href="#" onclick="showPage('about')">About Us</a>
+          <a href="#" onclick="showPage('contact')">Contact</a>
+          <a href="#" onclick="window.open('https://wa.me/254718079999?text=Hello%20Turbo%20Imports%20Kenya!%20I%27d%20like%20to%20request%20a%20custom%20import.','_blank')">Request Import</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Categories</div>
+        <div class="footer-links">
+          <a href="#" onclick="window.open('https://wa.me/254718079999?text=Hello%20Turbo%20Imports%20Kenya!%20I%27d%20like%20to%20request%20a%20custom%20import.','_blank')">Rims & Wheels</a>
+          <a href="#" onclick="window.open('https://wa.me/254718079999?text=Hello%20Turbo%20Imports%20Kenya!%20I%27d%20like%20to%20request%20a%20custom%20import.','_blank')">Brake Systems</a>
+          <a href="#" onclick="window.open('https://wa.me/254718079999?text=Hello%20Turbo%20Imports%20Kenya!%20I%27d%20like%20to%20request%20a%20custom%20import.','_blank')">Suspension Kits</a>
+          <a href="#" onclick="window.open('https://wa.me/254718079999?text=Hello%20Turbo%20Imports%20Kenya!%20I%27d%20like%20to%20request%20a%20custom%20import.','_blank')">Body Kits</a>
+          <a href="#" onclick="window.open('https://wa.me/254718079999?text=Hello%20Turbo%20Imports%20Kenya!%20I%27d%20like%20to%20request%20a%20custom%20import.','_blank')">Exhaust Systems</a>
+          <a href="#" onclick="window.open('https://wa.me/254718079999?text=Hello%20Turbo%20Imports%20Kenya!%20I%27d%20like%20to%20request%20a%20custom%20import.','_blank')">Performance Parts</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.24h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.8A16 16 0 0 0 16 16.73l.86-.86a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 23.76 18z"/></svg>
+          <span>+254 718 079 999<br>+254 718 079 999</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Turbo Imports Kenya Ltd. All rights reserved.</span>
+      <div style="display:flex; gap:20px">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+      <span>Made with ❤️ in Nairobi 🇰🇪</span>
+    </div>
+  </footer>
+
+</div><!-- end page-home -->
+
+
+<!-- ══════════════════════════════════════
+     SERVICES PAGE
+══════════════════════════════════════ -->
+<div class="page" id="page-services">
+  <div class="services-hero">
+    <div class="eyebrow" style="color:rgba(212,0,31,0.6)">What We Offer</div>
+    <h1 class="heading heading-xl" style="margin-bottom:20px">Our <span>Services</span></h1>
+    <p class="body-text">Beyond selling parts — we provide end-to-end solutions for Kenyan car owners, mechanics, garages and dealerships.</p>
+  </div>
+  <div class="services-body">
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-card-img" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=70')"></div>
+        <div class="service-card-body">
+          <div class="service-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <div class="service-title">Custom Import Sourcing</div>
+          <div class="service-desc">Tell us what you need. We source it from Japan, Germany, USA, UK or Dubai and handle everything including customs clearance and delivery.</div>
+          <button class="btn btn-primary btn-sm" onclick="window.open('https://wa.me/254718079999?text=Hello%20Turbo%20Imports%20Kenya!%20I%27d%20like%20to%20request%20a%20custom%20import.','_blank')">Request Now →</button>
+        </div>
+      </div>
+      <div class="service-card reveal d1">
+        <div class="service-card-img" style="background-image:url('https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&q=70')"></div>
+        <div class="service-card-body">
+          <div class="service-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+          <div class="service-title">Nationwide Delivery</div>
+          <div class="service-desc">All 47 counties via G4S, SGR Cargo and trusted courier partners. Nairobi same/next-day available. Real-time WhatsApp tracking throughout.</div>
+          <button class="btn btn-ghost btn-sm" onclick="showPage('contact')">Learn More →</button>
+        </div>
+      </div>
+      <div class="service-card reveal d2">
+        <div class="service-card-img" style="background-image:url('https://images.unsplash.com/photo-1617650728538-c5de5d7d2d44?w=600&q=70')"></div>
+        <div class="service-card-body">
+          <div class="service-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div class="service-title">Bulk & Garage Supply</div>
+          <div class="service-desc">Running a garage, workshop or dealership? Get wholesale pricing on bulk orders. We supply mechanics and garages across Nairobi with consistent stock.</div>
+          <button class="btn btn-ghost btn-sm" onclick="showPage('contact')">Get Bulk Pricing →</button>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-card-img" style="background-image:url('https://images.unsplash.com/photo-1581093588401-fbb62a02f120?w=600&q=70')"></div>
+        <div class="service-card-body">
+          <div class="service-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+          <div class="service-title">Installation Partnerships</div>
+          <div class="service-desc">We partner with trusted garages in Nairobi for professional installation. Vetted mechanics who know how to fit your specific parts correctly.</div>
+          <button class="btn btn-ghost btn-sm" onclick="showPage('contact')">Find a Partner →</button>
+        </div>
+      </div>
+      <div class="service-card reveal d1">
+        <div class="service-card-img" style="background-image:url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&q=70')"></div>
+        <div class="service-card-body">
+          <div class="service-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg></div>
+          <div class="service-title">Fitment Consultation</div>
+          <div class="service-desc">Not sure if it fits? Our team checks compatibility for your exact vehicle build — make, model, year, engine variant and existing mods — before you pay a cent.</div>
+          <a class="btn btn-wa btn-sm" href="https://wa.me/254718079999" target="_blank" rel="noopener">WhatsApp Us →</a>
+        </div>
+      </div>
+      <div class="service-card reveal d2">
+        <div class="service-card-img" style="background-image:url('https://images.unsplash.com/photo-1596463059283-da257325bab8?w=600&q=70')"></div>
+        <div class="service-card-body">
+          <div class="service-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+          <div class="service-title">Part Sourcing Research</div>
+          <div class="service-desc">Building a project car and need a full parts list sourced? We research availability, pricing and compatibility across all our international supplier networks.</div>
+          <button class="btn btn-ghost btn-sm" onclick="window.open('https://wa.me/254718079999?text=Hello%20Turbo%20Imports%20Kenya!%20I%27d%20like%20to%20request%20a%20custom%20import.','_blank')">Request Research →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     ABOUT PAGE
+══════════════════════════════════════ -->
+<div class="page" id="page-about">
+  <div class="about-hero">
+    <div class="about-hero-content">
+      <div class="eyebrow" style="color:rgba(212,0,31,0.6)">Our Story</div>
+      <h1 class="heading heading-xl" style="margin-bottom:20px">We're Kenya's<br><span>Car Enthusiasts</span></h1>
+      <p class="body-text">Founded by car people, for car people. We built Turbo Imports Kenya because we were tired of paying inflated prices for grey-market parts. We decided to fix that.</p>
+    </div>
+  </div>
+
+  <div class="about-body">
+    <div class="about-grid">
+      <div class="about-img reveal-left">
+        <div class="about-img-main"></div>
+        <div class="about-img-badge">
+          <div class="about-img-badge-num">8+</div>
+          <div class="about-img-badge-label">Years Importing</div>
+        </div>
+      </div>
+      <div class="about-text-content">
+        <div class="eyebrow reveal" style="color:rgba(212,0,31,0.6)">Who We Are</div>
+        <h2 class="heading heading-lg reveal d1" style="margin-bottom:24px">From Passion to<br>Kenya's <span>Premier</span><br>Importer</h2>
+        <p class="body-text reveal d2">Turbo Imports Kenya was founded in 2017 by a group of Nairobi-based car enthusiasts frustrated by the limited access to genuine performance parts in Kenya. The only options were overpriced dealer stock or risky grey-market counterfeits.</p>
+        <p class="body-text reveal d3" style="margin-top:16px">We started importing directly from Japan — one shipment at a time — and quickly built a reputation for authenticity, reliability, and fair pricing. Today, we're the go-to source for thousands of car owners across all 47 counties.</p>
+        <div class="about-divider reveal d3"></div>
+        <div class="country-tags reveal d4">
+          <span class="country-tag">🇯🇵 Japan</span>
+          <span class="country-tag">🇩🇪 Germany</span>
+          <span class="country-tag">🇺🇸 USA</span>
+          <span class="country-tag">🇬🇧 United Kingdom</span>
+          <span class="country-tag">🇦🇪 Dubai / UAE</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="values-grid">
+      <div class="value-card reveal">
+        <div class="value-icon">🔒</div>
+        <div class="value-title">Authenticity First</div>
+        <div class="value-desc">We only source from verified, authorised suppliers. Every product is authenticated before it reaches our warehouse.</div>
+      </div>
+      <div class="value-card reveal d1">
+        <div class="value-icon">💰</div>
+        <div class="value-title">Fair Pricing</div>
+        <div class="value-desc">By cutting the middleman and importing directly, we pass the savings on to you. Premium quality, Kenyan affordability.</div>
+      </div>
+      <div class="value-card reveal d2">
+        <div class="value-icon">🤝</div>
+        <div class="value-title">Genuine Expertise</div>
+        <div class="value-desc">Our team knows cars. We give honest advice because we're enthusiasts ourselves — not just salespeople.</div>
+      </div>
+      <div class="value-card reveal d3">
+        <div class="value-icon">🚀</div>
+        <div class="value-title">Speed & Reliability</div>
+        <div class="value-desc">Best freight partners. Your parts cleared, delivered, and in your hands as fast as possible.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     CONTACT PAGE
+══════════════════════════════════════ -->
+<div class="page" id="page-contact">
+  <div class="contact-layout">
+    <div class="contact-info">
+      <div class="eyebrow" style="color:rgba(212,0,31,0.6)">Get In Touch</div>
+      <h2 class="heading heading-lg" style="margin-bottom:24px">We're Here<br><span>For You</span></h2>
+      <p style="color:var(--muted); font-size:0.88rem; line-height:1.75; margin-bottom:32px">Questions about a product, need a quote, or want to discuss a bulk order? Reach out via WhatsApp for the fastest response.</p>
+
+      <div class="contact-card reveal">
+        <div class="contact-card-icon"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.24h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.8A16 16 0 0 0 16 16.73l.86-.86a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 23.76 18z"/></svg></div>
+        <div><div class="contact-card-title">Phone & WhatsApp</div><div class="contact-card-val">+254 718 079 999<br>+254 718 079 999</div></div>
+      </div>
+
+      <div class="hours-card reveal d3">
+        <div class="hours-title">// Business Hours</div>
+        <div class="hours-row"><span>Monday – Friday</span><span>8:00 AM – 6:00 PM</span></div>
+        <div class="hours-row"><span>Saturday</span><span>9:00 AM – 5:00 PM</span></div>
+        <div class="hours-row"><span>Sunday</span><span>10:00 AM – 2:00 PM</span></div>
+        <div class="hours-row"><span>WhatsApp</span><span style="color:#25D366">Available 7 days</span></div>
+      </div>
+      <a href="https://wa.me/254718079999" class="btn btn-wa btn-lg" target="_blank" rel="noopener" style="width:100%; justify-content:center">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Message Us on WhatsApp
+      </a>
+    </div>
+
+    <div>
+      <div class="contact-form-card reveal-right">
+        <div class="contact-form-title">Send Us a Message</div>
+        <div class="contact-form-inner">
+          <div class="form-group"><label class="form-label">Name</label><input type="text" class="form-input" placeholder="Your full name"></div>
+          <div class="form-group"><label class="form-label">Phone / WhatsApp</label><input type="tel" class="form-input" placeholder="+254..."></div>
+          <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="your@email.com"></div>
+          <div class="form-group">
+            <label class="form-label">Subject</label>
+            <select class="form-select">
+              <option>Product Enquiry</option>
+              <option>Import Request</option>
+              <option>Order Status</option>
+              <option>Bulk Order</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" placeholder="How can we help you?" style="min-height:130px"></textarea></div>
+          <button class="btn btn-primary" style="justify-content:center; width:100%">Send Message</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="map-section">
+    <div class="map-placeholder">
+      <div class="map-inner">
+        <div class="map-pin">📍</div>
+        <div class="map-label">Turbo Imports Kenya</div>
+        <div class="map-sublabel">Enterprise Road, Industrial Area, Nairobi</div>
+        <a href="https://maps.google.com/?q=Industrial+Area+Nairobi+Kenya" target="_blank" class="btn btn-primary btn-sm" style="margin-top:20px">Open in Google Maps</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ─────────────────────────────────────────────
+   CUSTOM CURSOR
+───────────────────────────────────────────── */
+const cursor = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursorRing');
+let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX; mouseY = e.clientY;
+  cursor.style.left = mouseX + 'px';
+  cursor.style.top = mouseY + 'px';
+});
+
+function animateRing() {
+  ringX += (mouseX - ringX) * 0.12;
+  ringY += (mouseY - ringY) * 0.12;
+  cursorRing.style.left = ringX + 'px';
+  cursorRing.style.top = ringY + 'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+
+document.querySelectorAll('a, button, [role="button"], .cat-card, .why-card, .testi-card').forEach(el => {
+  el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); cursorRing.classList.add('hover'); });
+  el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); cursorRing.classList.remove('hover'); });
+});
+
+/* ─────────────────────────────────────────────
+   LOADER
+───────────────────────────────────────────── */
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hidden');
+    initReveal();
+  }, 1500);
+});
+
+/* ─────────────────────────────────────────────
+   PAGE NAVIGATION
+───────────────────────────────────────────── */
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => {
+    p.classList.remove('active');
+    p.style.animation = 'none';
+  });
+  const target = document.getElementById('page-' + id);
+  target.style.animation = 'none';
+  target.offsetHeight; // reflow
+  target.style.animation = '';
+  target.classList.add('active');
+
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  const navEl = document.getElementById('nav-' + id);
+  if (navEl) navEl.classList.add('active');
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  setTimeout(initReveal, 150);
+}
+
+/* ─────────────────────────────────────────────
+   MOBILE MENU
+───────────────────────────────────────────── */
+function toggleMobile() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+  document.getElementById('hamburger').classList.toggle('open');
+}
+
+/* ─────────────────────────────────────────────
+   NAVBAR SCROLL
+───────────────────────────────────────────── */
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+/* ─────────────────────────────────────────────
+   REVEAL ANIMATIONS
+───────────────────────────────────────────── */
+let revealObserver;
+function initReveal() {
+  if (revealObserver) revealObserver.disconnect();
+  const activeId = document.querySelector('.page.active')?.id || 'page-home';
+  const els = document.querySelectorAll('#' + activeId + ' .reveal:not(.visible), #' + activeId + ' .reveal-left:not(.visible), #' + activeId + ' .reveal-right:not(.visible)');
+  revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+  els.forEach(el => revealObserver.observe(el));
+}
+
+/* ─────────────────────────────────────────────
+   PARTS STRIP — slide in from right on scroll
+───────────────────────────────────────────── */
+(function () {
+  const stripItems = document.querySelectorAll('.parts-strip .part-img');
+  if (!stripItems.length) return;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('strip-visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  stripItems.forEach(el => obs.observe(el));
+})();
+
+/* ─────────────────────────────────────────────
+   SHOWCASE CAROUSEL — smooth infinite loop, no jump bug
+───────────────────────────────────────────── */
+(function () {
+  const track   = document.getElementById('carouselTrack');
+  if (!track) return;
+  const dots    = Array.from(document.querySelectorAll('.carousel-dot'));
+  const SPEED   = 2800;
+  const EASE    = 'cubic-bezier(0.25, 1, 0.5, 1)';
+  const DUR_MS  = 650;
+
+  /* 1. Collect originals & triple-clone for seamless wrap */
+  const originals = Array.from(track.querySelectorAll('.carousel-slide'));
+  const N = originals.length;
+
+  /* clear track, rebuild: [clones-before] [originals] [clones-after] */
+  track.innerHTML = '';
+  const allCloned = [
+    ...originals.map(s => s.cloneNode(true)),
+    ...originals.map(s => { const c = s.cloneNode(true); return c; }),
+    ...originals.map(s => s.cloneNode(true))
+  ];
+  allCloned.forEach(s => track.appendChild(s));
+  const slides = Array.from(track.querySelectorAll('.carousel-slide'));
+
+  /* 2. State — index into the MIDDLE band (N…2N-1) */
+  let cur = N;        // points at original[0]
+  let logical = 0;   // 0-based within originals
+  let isAnimating = false;
+  let timer = null;
+
+  /* 3. Geometry */
+  function slideW() {
+    return slides[0] ? slides[0].offsetWidth : 220;
+  }
+  function gapW() { return 28; }
+  function centreOffset() {
+    return track.parentElement.offsetWidth / 2 - slideW() / 2;
+  }
+  function getX(idx) {
+    return centreOffset() - idx * (slideW() + gapW());
+  }
+
+  /* 4. Set position without animation */
+  function jumpTo(idx) {
+    track.style.transition = 'none';
+    track.style.transform = `translateX(${getX(idx)}px)`;
+    /* force reflow so subsequent transitions apply */
+    track.offsetHeight;
+  }
+
+  /* 5. Animate to position */
+  function slideTo(idx, cb) {
+    if (isAnimating) return;
+    isAnimating = true;
+    track.style.transition = `transform ${DUR_MS}ms ${EASE}`;
+    track.style.transform  = `translateX(${getX(idx)}px)`;
+    setTimeout(() => {
+      isAnimating = false;
+      if (cb) cb();
+    }, DUR_MS + 20);
+  }
+
+  /* 6. Apply visual classes */
+  function applyClasses() {
+    slides.forEach((s, i) => {
+      s.classList.remove('is-active', 'is-near', 'is-far');
+      const d = ((i - cur) % N + N) % N;
+      const dist = Math.min(d, N - d);
+      if (dist === 0)      s.classList.add('is-active');
+      else if (dist === 1) s.classList.add('is-near');
+      else                 s.classList.add('is-far');
+    });
+    dots.forEach((d, i) => d.classList.toggle('active', i === logical));
+  }
+
+  /* 7. Go to a logical index (0..N-1) */
+  function goTo(newLogical, dir) {
+    const delta = dir !== undefined ? dir : (newLogical > logical ? 1 : -1);
+    const newCur = cur + delta;
+    logical = ((newLogical % N) + N) % N;
+    slideTo(newCur, () => {
+      cur = newCur;
+      /* if we've drifted out of the middle band, silently reset */
+      if (cur < N || cur >= N * 2) {
+        const wrapped = ((cur - N) % N + N) % N + N;
+        cur = wrapped;
+        jumpTo(cur);
+      }
+      applyClasses();
+    });
+    cur = newCur; /* optimistic update for applyClasses call below */
+    applyClasses();
+  }
+
+  function next() { goTo((logical + 1) % N, 1); }
+  function prev() { goTo((logical - 1 + N) % N, -1); }
+
+  /* 8. Timer */
+  function startTimer() { clearInterval(timer); timer = setInterval(next, SPEED); }
+  function stopTimer()  { clearInterval(timer); }
+
+  /* 9. Dot clicks */
+  dots.forEach((d, i) => {
+    d.addEventListener('click', () => {
+      const delta = i > logical ? 1 : -1;
+      goTo(i, delta);
+      startTimer();
+    });
+  });
+
+  /* 10. Pause on hover */
+  track.parentElement.addEventListener('mouseenter', stopTimer);
+  track.parentElement.addEventListener('mouseleave', startTimer);
+
+  /* 11. Touch swipe */
+  let touchStartX = 0;
+  track.parentElement.addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+    stopTimer();
+  }, { passive: true });
+  track.parentElement.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) diff > 0 ? next() : prev();
+    startTimer();
+  }, { passive: true });
+
+  /* 12. Init */
+  setTimeout(() => {
+    jumpTo(cur);
+    applyClasses();
+    startTimer();
+  }, 120);
+
+  window.addEventListener('resize', () => { jumpTo(cur); });
+})();
+
+</script>
+</body>
+</html>
