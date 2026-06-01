@@ -1630,6 +1630,204 @@ body::after {
   .why-item { padding: 24px 20px; }
   .testi-grid { grid-template-columns: 1fr; }
 }
+
+/* ═══════════════════════════════════════════════
+   RIMS CATALOG PAGE
+═══════════════════════════════════════════════ */
+.rims-hero {
+  padding: calc(var(--nav-h) + 60px) 48px 48px;
+  background: var(--ink);
+  border-bottom: 1px solid var(--line);
+  position: relative; overflow: hidden;
+}
+.rims-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 900px 400px at 80% 50%, rgba(212,0,31,0.09) 0%, transparent 70%);
+  pointer-events: none;
+}
+.rims-hero-content { position: relative; z-index: 2; }
+.rims-hero-row {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  flex-wrap: wrap; gap: 20px;
+}
+.rims-back {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 0.65rem;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--muted); background: none; border: none;
+  padding: 0; cursor: none; margin-bottom: 20px;
+  transition: color 0.2s;
+}
+.rims-back:hover { color: var(--white); }
+.rims-back svg { stroke: currentColor; fill: none; width: 14px; height: 14px; }
+.rims-count {
+  font-family: var(--font-mono); font-size: 0.65rem;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--muted); align-self: flex-end;
+}
+.rims-count span { color: var(--red); }
+.rims-catalog-body {
+  max-width: 1320px; margin: 0 auto;
+  padding: 48px 48px 100px;
+}
+.rims-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+}
+.rim-card {
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--ink);
+  border: 1px solid var(--line);
+  cursor: none;
+  transition: border-color 0.25s, transform 0.3s var(--ease), box-shadow 0.3s;
+}
+.rim-card:hover {
+  border-color: rgba(212,0,31,0.45);
+  transform: translateY(-5px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+}
+.rim-card-img {
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: var(--slate);
+}
+.rim-card-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s var(--ease), filter 0.3s;
+  filter: brightness(0.92) saturate(0.9);
+}
+.rim-card:hover .rim-card-img img {
+  transform: scale(1.07);
+  filter: brightness(1) saturate(1.1);
+}
+.rim-card-footer {
+  padding: 9px 11px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.rim-card-label {
+  font-family: var(--font-mono); font-size: 0.56rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--muted);
+}
+.rim-card-zoom {
+  width: 22px; height: 22px;
+  border-radius: 4px;
+  background: var(--red-dim);
+  border: 1px solid rgba(212,0,31,0.2);
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+.rim-card:hover .rim-card-zoom { background: var(--red); border-color: var(--red); }
+.rim-card-zoom svg { stroke: var(--red); fill: none; width: 10px; height: 10px; }
+.rim-card:hover .rim-card-zoom svg { stroke: white; }
+
+/* Rim lightbox */
+#rimLightbox {
+  display: none;
+  position: fixed; inset: 0; z-index: 99999;
+  background: rgba(0,0,0,0.94);
+  align-items: center; justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(18px);
+}
+#rimLightbox.open { display: flex; }
+.rim-lb-inner {
+  position: relative;
+  max-width: 820px; width: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 16px;
+  animation: reviewPop 0.3s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+.rim-lb-img {
+  width: 100%;
+  max-height: 72vh;
+  object-fit: contain;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.08);
+  display: block;
+  background: var(--ink);
+}
+.rim-lb-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; gap: 12px; flex-wrap: wrap;
+}
+.rim-lb-label {
+  font-family: var(--font-mono); font-size: 0.65rem;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--muted);
+}
+.rim-lb-label span { color: var(--red); }
+.rim-lb-controls { display: flex; gap: 8px; align-items: center; }
+.rim-lb-btn {
+  width: 38px; height: 38px; border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.04);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: border-color 0.2s, background 0.2s;
+  flex-shrink: 0;
+}
+.rim-lb-btn:hover { border-color: var(--red); background: var(--red-dim); }
+.rim-lb-btn svg { stroke: rgba(255,255,255,0.7); fill: none; width: 15px; height: 15px; }
+.rim-lb-btn.close-btn:hover { background: var(--red); border-color: var(--red); }
+.rim-lb-btn.close-btn:hover svg { stroke: white; }
+
+/* ─── Brand Filter Bar ─── */
+.rims-filter-bar {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 8px;
+  margin-bottom: 36px;
+}
+.rims-filter-btn {
+  font-family: var(--font-mono); font-size: 0.62rem;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 8px 16px; border-radius: 4px;
+  border: 1px solid var(--line);
+  background: transparent; color: var(--muted);
+  cursor: pointer; transition: all 0.2s var(--ease);
+  white-space: nowrap;
+}
+.rims-filter-btn:hover {
+  border-color: rgba(212,0,31,0.4); color: var(--white);
+  background: rgba(212,0,31,0.06);
+}
+.rims-filter-btn.active {
+  background: var(--red); border-color: var(--red); color: white;
+}
+/* Load More */
+.rims-load-more-wrap {
+  text-align: center; margin-top: 40px;
+}
+.rims-load-more-btn {
+  font-family: var(--font-head); font-weight: 700; font-size: 0.8rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 14px 36px; border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: transparent; color: var(--white);
+  cursor: pointer; transition: all 0.25s var(--ease);
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.rims-load-more-btn:hover {
+  border-color: var(--red); background: var(--red-dim); color: var(--white);
+}
+.rims-load-more-btn.hidden { display: none; }
+.rims-load-more-btn svg { stroke: currentColor; fill: none; }
+
+@media (max-width: 1100px) {
+  .rims-grid { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 768px) {
+  .rims-hero { padding: calc(var(--nav-h) + 28px) 20px 28px; }
+  .rims-catalog-body { padding: 28px 20px 60px; }
+  .rims-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+}
+@media (max-width: 480px) {
+  .rims-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+}
 </style>
 </head>
 <body>
@@ -1777,9 +1975,9 @@ body::after {
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
               WhatsApp Us
             </a>
-            <button class="btn btn-ghost btn-lg" onclick="openGallery('rims')">
+            <button class="btn btn-ghost btn-lg" onclick="showPage('rims-catalog')">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-              View Rims
+              View All Rims
             </button>
           </div>
         </div>
@@ -2147,6 +2345,84 @@ body::after {
   </div>
 </div>
 
+<!-- ══════════════════════════════════════
+     RIMS CATALOG PAGE
+══════════════════════════════════════ -->
+<div class="page" id="page-rims-catalog">
+
+  <!-- Hero / Header -->
+  <div class="rims-hero">
+    <div class="rims-hero-content">
+      <button class="rims-back" onclick="showPage('home')">
+        <svg viewBox="0 0 24 24" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        Back to Home
+      </button>
+      <div class="rims-hero-row">
+        <div>
+          <div class="eyebrow">Premium Wheels</div>
+          <h1 class="heading heading-lg">Rims <span>Catalogue</span></h1>
+          <p style="color:var(--muted);font-size:0.9rem;margin-top:12px;max-width:500px;line-height:1.7;">Genuine alloy wheels imported directly from Japan, Germany &amp; the UK. Click any rim to view it in full. Message us on WhatsApp to enquire about any set.</p>
+        </div>
+        <div class="rims-count"><span>98</span> rims available</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filter + Grid -->
+  <div class="rims-catalog-body">
+    <div class="rims-filter-bar" id="rimsFilterBar">
+      <!-- generated by JS -->
+    </div>
+    <div class="rims-grid" id="rimsGrid">
+      <!-- Generated by JS below -->
+    </div>
+    <div class="rims-load-more-wrap">
+      <button class="rims-load-more-btn hidden" id="rimsLoadMore">
+        <svg width="14" height="14" viewBox="0 0 24 24" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        Load More Rims
+      </button>
+    </div>
+  </div>
+
+  <!-- WhatsApp CTA strip -->
+  <div style="background:var(--ink);border-top:1px solid var(--line);padding:32px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;">
+    <div>
+      <div style="font-family:var(--font-head);font-weight:700;font-size:1.1rem;color:var(--white);">Interested in a set?</div>
+      <div style="font-size:0.85rem;color:var(--muted);margin-top:4px;">Send us the image or rim number and we'll give you pricing &amp; availability instantly.</div>
+    </div>
+    <a href="https://wa.me/254708000900?text=Hello%20TIK!%20I'm%20interested%20in%20rims%20from%20your%20catalogue." class="btn btn-wa btn-lg" target="_blank" rel="noopener">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp Us
+    </a>
+  </div>
+
+</div>
+
+<!-- RIM LIGHTBOX -->
+<div id="rimLightbox" onclick="rimLightboxBgClose(event)">
+  <div class="rim-lb-inner">
+    <img class="rim-lb-img" id="rimLbImg" src="" alt="Rim">
+    <div class="rim-lb-bar">
+      <div class="rim-lb-label" id="rimLbLabel">Rim <span id="rimLbNum"></span></div>
+      <div class="rim-lb-controls">
+        <button class="rim-lb-btn" onclick="rimLbNav(-1)" title="Previous">
+          <svg viewBox="0 0 24 24" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="rim-lb-btn" onclick="rimLbNav(1)" title="Next">
+          <svg viewBox="0 0 24 24" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <a id="rimLbWa" href="#" target="_blank" rel="noopener" class="btn btn-wa" style="padding:10px 16px;font-size:0.72rem;letter-spacing:0.08em;gap:7px;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Enquire
+        </a>
+        <button class="rim-lb-btn close-btn" onclick="rimLbClose()" title="Close">
+          <svg viewBox="0 0 24 24" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 /* ─────────────────────────────────────────────
    CUSTOM CURSOR
@@ -2483,6 +2759,280 @@ function closeReviewOnBg(e) {
 
   window.addEventListener('resize', () => { jumpTo(cur); });
 })();
+
+/* ─────────────────────────────────────────────
+   RIMS CATALOG — Brand data, filter bar, load-more
+───────────────────────────────────────────── */
+/* ─────────────────────────────────────────────
+   RIMS CATALOG — Brand data, filter bar, load-more
+───────────────────────────────────────────── */
+(function () {
+  const grid       = document.getElementById('rimsGrid');
+  const filterBar  = document.getElementById('rimsFilterBar');
+  const loadMoreBtn = document.getElementById('rimsLoadMore');
+  if (!grid) return;
+
+  /* ── 1. Brand + Direct Image Path Map ── */
+  const RIM_DATA = window._RIM_DATA = {
+    25:  { brand: 'Method',            image: 'images/rims/r25.jpeg' },
+    26:  { brand: 'Method',            image: 'images/rims/r26.jpeg' },
+    27:  { brand: 'Method',            image: 'images/rims/r27.jpeg' },
+    29:  { brand: 'Method',            image: 'images/rims/r29.jpeg' },
+    33:  { brand: 'Method',            image: 'images/rims/r33.jpeg' },
+    34:  { brand: 'Braid',             image: 'images/rims/r34.jpeg' },
+    35:  { brand: 'Braid',             image: 'images/rims/r35.jpeg' },
+    37:  { brand: 'Braid',             image: 'images/rims/r37.jpeg' },
+    39:  { brand: 'Titania',           image: 'images/rims/r39.jpeg' },
+    40:  { brand: 'Fifteen52',         image: 'images/rims/r40.jpeg' },
+    41:  { brand: 'Fifteen52',         image: 'images/rims/r41.jpeg' },
+    44:  { brand: 'Titania',           image: 'images/rims/r44.jpeg' },
+    49:  { brand: 'Method',            image: 'images/rims/r49.jpeg' },
+    51:  { brand: 'Method',            image: 'images/rims/r51.jpeg' },
+    55:  { brand: 'Method',            image: 'images/rims/r55.jpeg' },
+    56:  { brand: 'Method',            image: 'images/rims/r56.jpeg' },
+    57:  { brand: 'Method',            image: 'images/rims/r57.jpeg' },
+    58:  { brand: 'Method',            image: 'images/rims/r58.jpeg' },
+    60:  { brand: 'Method',            image: 'images/rims/r60.jpeg' },
+    62:  { brand: 'Method',            image: 'images/rims/r62.jpeg' },
+    63:  { brand: 'Method',            image: 'images/rims/r63.jpeg' },
+    64:  { brand: 'Method',            image: 'images/rims/r64.jpeg' },
+    65:  { brand: 'Method',            image: 'images/rims/r65.jpeg' },
+    66:  { brand: 'Method',            image: 'images/rims/r66.jpeg' },
+    67:  { brand: 'Method',            image: 'images/rims/r67.jpeg' },
+    69:  { brand: 'Method',            image: 'images/rims/r69.jpeg' },
+    71:  { brand: 'Method',            image: 'images/rims/r71.jpeg' },
+    73:  { brand: 'Method',            image: 'images/rims/r73.jpeg' },
+    74:  { brand: 'Method',            image: 'images/rims/r74.jpeg' },
+    75:  { brand: 'Method',            image: 'images/rims/r75.jpeg' },
+    76:  { brand: 'Method',            image: 'images/rims/r76.jpeg' },
+    78:  { brand: 'Method',            image: 'images/rims/r78.jpeg' },
+    79:  { brand: 'Land Rover',        image: 'images/rims/r79.jpeg' },
+    80:  { brand: 'Land Rover',        image: 'images/rims/r80.jpeg' },
+    81:  { brand: 'Land Rover',        image: 'images/rims/r81.jpeg' },
+    82:  { brand: 'Vossen',            image: 'images/rims/r82.jpeg' },
+    83:  { brand: 'Vossen',            image: 'images/rims/r83.jpeg' },
+    84:  { brand: 'Land Rover',        image: 'images/rims/r84.jpeg' },
+    85:  { brand: 'Land Rover',        image: 'images/rims/r85.jpeg' },
+    86:  { brand: 'Urban Automotive',  image: 'images/rims/r86.jpeg' },
+    87:  { brand: 'Urban Automotive',  image: 'images/rims/r87.jpeg' },
+    88:  { brand: 'Land Rover',        image: 'images/rims/r88.jpeg' },
+    89:  { brand: 'Land Rover',        image: 'images/rims/r89.jpeg' },
+    90:  { brand: 'Land Rover',        image: 'images/rims/r90.jpeg' },
+    91:  { brand: 'Urban Automotive',  image: 'images/rims/r91.jpeg' },
+    92:  { brand: 'Urban Automotive',  image: 'images/rims/r92.jpeg' },
+    94:  { brand: 'Land Rover',        image: 'images/rims/r94.jpeg' },
+    96:  { brand: 'Kahn',              image: 'images/rims/r96.jpeg' },
+    97:  { brand: 'Kahn',              image: 'images/rims/r97.jpeg' },
+    98:  { brand: 'Kahn',              image: 'images/rims/r98.jpeg' },
+    99:  { brand: 'Kahn',              image: 'images/rims/r99.jpeg' },
+    101: { brand: 'Urban Automotive',  image: 'images/rims/r101.jpeg' },
+    102: { brand: 'Urban Automotive',  image: 'images/rims/r102.jpeg' },
+    103: { brand: 'Urban Automotive',  image: 'images/rims/r103.jpeg' },
+    105: { brand: 'Land Rover',        image: 'images/rims/r105.jpeg' },
+    106: { brand: 'Land Rover',        image: 'images/rims/r106.jpeg' },
+    107: { brand: 'Rays',              image: 'images/rims/r107.jpeg' },
+    108: { brand: 'Rays',              image: 'images/rims/r108.jpeg' },
+    109: { brand: 'Land Rover',        image: 'images/rims/r109.jpeg' },
+    110: { brand: 'Land Rover',        image: 'images/rims/r110.jpeg' },
+    111: { brand: 'Porgirito',         image: 'images/rims/r111.jpeg' },
+    112: { brand: 'Lamborghini',       image: 'images/rims/r112.jpeg' },
+    113: { brand: 'Lamborghini',       image: 'images/rims/r113.jpeg' },
+    114: { brand: 'Lamborghini',       image: 'images/rims/r114.jpeg' },
+    115: { brand: 'Lamborghini',       image: 'images/rims/r115.jpeg' },
+    116: { brand: 'Lamborghini',       image: 'images/rims/r116.jpeg' },
+    117: { brand: 'Lamborghini',       image: 'images/rims/r117.jpeg' },
+    118: { brand: 'Lamborghini',       image: 'images/rims/r118.jpeg' },
+    119: { brand: 'Lamborghini',       image: 'images/rims/r119.jpeg' },
+    120: { brand: 'Lamborghini',       image: 'images/rims/r120.jpeg' },
+    121: { brand: 'Lamborghini',       image: 'images/rims/r121.jpeg' },
+  };
+
+  const ROWS_PER_PAGE = 10;
+  const COLS = 5;
+  const PAGE_SIZE = ROWS_PER_PAGE * COLS;
+
+  /* ── 2. State ── */
+  window._rimLoaded    = [];  // Track successfully loaded IDs
+  window._rimCards     = {};  // Map rimNum to DOM element
+  window._rimActiveBrand = 'All';
+  let   _activeBrand   = 'All';
+  let   _visibleCount  = PAGE_SIZE;
+
+  /* ── 3. Build DOM elements explicitly from active IDs ── */
+  Object.keys(RIM_DATA).forEach(idStr => {
+    const i = parseInt(idStr, 10);
+    const data = RIM_DATA[i];
+
+    const card = document.createElement('div');
+    card.className       = 'rim-card';
+    card.dataset.rim     = i;
+    card.dataset.brand   = data.brand;
+    card.style.display   = 'none'; // hidden until image confirms loaded
+
+    card.innerHTML = `
+      <div class="rim-card-img">
+        <img src="${data.image}" alt="${data.brand}">
+      </div>
+      <div class="rim-card-footer">
+        <span class="rim-card-label">${data.brand}</span>
+        <div class="rim-card-zoom">
+          <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+      </div>`;
+
+    const img = card.querySelector('img');
+
+    img.addEventListener('load', () => {
+      if (!window._rimLoaded.includes(i)) {
+        window._rimLoaded.push(i);
+        window._rimLoaded.sort((a, b) => a - b);
+      }
+      window._rimCards[i] = card;
+      card.onclick = () => openRimLightbox(i);
+      _applyFilter();
+      _buildFilterBar();
+    });
+
+    img.addEventListener('error', () => {
+      card.remove();
+    });
+
+    grid.appendChild(card);
+  });
+
+  /* ── 4. Filter bar builder ── */
+  function _getBrands() {
+    const brands = new Set();
+    window._rimLoaded.forEach(n => {
+      const d = RIM_DATA[n];
+      if (d) brands.add(d.brand);
+    });
+    return ['All', ...Array.from(brands).sort()];
+  }
+
+  function _buildFilterBar() {
+    if (!filterBar) return;
+    const brands = _getBrands();
+    const key = brands.join(',');
+    if (filterBar.dataset.builtFor === key) return;
+    filterBar.dataset.builtFor = key;
+
+    filterBar.innerHTML = '';
+    brands.forEach(brand => {
+      const btn = document.createElement('button');
+      btn.className = 'rims-filter-btn' + (brand === _activeBrand ? ' active' : '');
+      btn.textContent = brand;
+      btn.onclick = () => {
+        _activeBrand = brand;
+        window._rimActiveBrand = brand;
+        _visibleCount = PAGE_SIZE;
+        filterBar.querySelectorAll('.rims-filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        _applyFilter();
+      };
+      filterBar.appendChild(btn);
+    });
+  }
+
+  /* ── 5. Apply brand layout filters + load-more rules ── */
+  function _applyFilter() {
+    const allNums = window._rimLoaded.filter(n => {
+      if (_activeBrand === 'All') return true;
+      return (RIM_DATA[n] || {}).brand === _activeBrand;
+    });
+
+    // Show/hide based on pagination visibility window
+    allNums.forEach((n, idx) => {
+      const card = window._rimCards[n];
+      if (!card) return;
+      card.style.display = idx < _visibleCount ? '' : 'none';
+    });
+
+    // Clean up cards outside of current active query selection
+    window._rimLoaded.forEach(n => {
+      if (!allNums.includes(n) && window._rimCards[n]) {
+        window._rimCards[n].style.display = 'none';
+      }
+    });
+
+    if (loadMoreBtn) {
+      const hasMore = allNums.length > _visibleCount;
+      loadMoreBtn.classList.toggle('hidden', !hasMore);
+    }
+
+    const countEl = document.querySelector('.rims-count span');
+    if (countEl) countEl.textContent = allNums.length;
+  }
+
+  if (loadMoreBtn) {
+    loadMoreBtn.addEventListener('click', () => {
+      _visibleCount += PAGE_SIZE;
+      _applyFilter();
+    });
+  }
+})();
+
+/* ─────────────────────────────────────────────
+   RIM LIGHTBOX CONTROLS
+───────────────────────────────────────────── */
+let _currentRimIndex = 0;
+
+function openRimLightbox(rimNum) {
+  const filtered = _getFilteredRims();
+  const idx = filtered.indexOf(rimNum);
+  _currentRimIndex = idx >= 0 ? idx : 0;
+  _updateRimLightbox();
+  document.getElementById('rimLightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function rimLbClose() {
+  document.getElementById('rimLightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function rimLightboxBgClose(e) {
+  if (e.target === document.getElementById('rimLightbox')) rimLbClose();
+}
+
+function rimLbNav(dir) {
+  const filtered = _getFilteredRims();
+  if (!filtered.length) return;
+  _currentRimIndex = (_currentRimIndex + dir + filtered.length) % filtered.length;
+  _updateRimLightbox();
+}
+
+function _getFilteredRims() {
+  const loaded = window._rimLoaded || [];
+  const activeBrand = window._rimActiveBrand || 'All';
+  if (activeBrand === 'All') return loaded;
+  return loaded.filter(n => ((window._RIM_DATA && window._RIM_DATA[n]) || {}).brand === activeBrand);
+}
+
+function _updateRimLightbox() {
+  const filtered = _getFilteredRims();
+  if (!filtered.length) return;
+  if (_currentRimIndex >= filtered.length) _currentRimIndex = 0;
+  
+  const rimNum   = filtered[_currentRimIndex];
+  const data     = window._RIM_DATA[rimNum];
+  if (!data) return;
+
+  const waText   = encodeURIComponent(`Hello TIK! I'm interested in a ${data.brand} rim from your catalogue.`);
+  
+  document.getElementById('rimLbImg').src         = data.image;
+  document.getElementById('rimLbImg').alt         = data.brand;
+  document.getElementById('rimLbNum').textContent = data.brand;
+  document.getElementById('rimLbWa').href         = `https://wa.me/254708000900?text=${waText}`;
+}
+
+document.addEventListener('keydown', e => {
+  const lb = document.getElementById('rimLightbox');
+  if (!lb || !lb.classList.contains('open')) return;
+  if (e.key === 'ArrowRight') rimLbNav(1);
+  if (e.key === 'ArrowLeft')  rimLbNav(-1);
+  if (e.key === 'Escape')     rimLbClose();
+});
 
 </script>
 
