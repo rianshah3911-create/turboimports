@@ -30,7 +30,7 @@
   --font-head: 'Syne', sans-serif;
   --font-mono: 'Syne Mono', monospace;
   --font-body: 'DM Sans', sans-serif;
-  --nav-h: 76px;
+  --nav-h: 100px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-back: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-in: cubic-bezier(0.55, 0, 1, 0.45);
@@ -44,33 +44,11 @@ body {
   color: var(--white);
   overflow-x: hidden;
   line-height: 1.5;
-  cursor: none;
 }
 a { text-decoration: none; color: inherit; }
 img { max-width: 100%; display: block; }
-button { cursor: none; border: none; background: none; font-family: inherit; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
 ul { list-style: none; }
-
-/* ═══════════════════════════════════════════════
-   CUSTOM CURSOR
-═══════════════════════════════════════════════ */
-.cursor {
-  position: fixed; width: 10px; height: 10px;
-  background: var(--red-vivid); border-radius: 50%;
-  pointer-events: none; z-index: 99999;
-  transform: translate(-50%, -50%);
-  transition: width 0.2s var(--ease), height 0.2s var(--ease), background 0.2s;
-  mix-blend-mode: difference;
-}
-.cursor-ring {
-  position: fixed; width: 36px; height: 36px;
-  border: 1px solid rgba(255,255,255,0.4);
-  border-radius: 50%; pointer-events: none; z-index: 99998;
-  transform: translate(-50%, -50%);
-  transition: transform 0.12s var(--ease), width 0.3s var(--ease), height 0.3s var(--ease), border-color 0.2s;
-}
-.cursor.hover { width: 20px; height: 20px; }
-.cursor-ring.hover { width: 60px; height: 60px; border-color: var(--red-vivid); }
 
 /* ═══════════════════════════════════════════════
    PAGE SYSTEM
@@ -101,24 +79,31 @@ ul { list-style: none; }
    NAVBAR
 ═══════════════════════════════════════════════ */
 nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  height: var(--nav-h);
+  position: fixed; top: 18px; left: 50%; transform: translateX(-50%); z-index: 1000;
+  height: 66px;
+  width: min(880px, calc(100% - 40px));
   display: flex; align-items: center;
-  padding: 0 48px;
-  background: var(--black);
-  border-bottom: 1px solid var(--line);
+  padding: 0 10px 0 22px;
+  background: rgba(24,24,28,0.55);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 999px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06);
+  transition: background 0.3s, box-shadow 0.3s, border-color 0.3s;
 }
 nav.scrolled {
-  background: var(--black);
-  border-bottom: 1px solid var(--line);
+  background: rgba(16,16,19,0.72);
+  border-color: rgba(255,255,255,0.16);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06);
 }
 .nav-logo {
   display: flex; align-items: center;
-  cursor: none;
+  cursor: pointer;
   flex-shrink: 0;
 }
 .nav-logo img {
-  height: 44px;
+  height: 34px;
   width: auto;
   object-fit: contain;
   filter: brightness(0) invert(1);
@@ -135,7 +120,7 @@ nav.scrolled {
   letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--muted); padding: 8px 16px; border-radius: 4px;
   transition: color 0.2s, background 0.2s;
-  cursor: none;
+  cursor: pointer;
 }
 .nav-links a:hover { color: var(--white); background: rgba(255,255,255,0.06); }
 .nav-links a.active { color: var(--white); }
@@ -147,7 +132,7 @@ nav.scrolled {
   background: var(--red); color: white;
   border: 1px solid var(--red);
   transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-  cursor: none;
+  cursor: pointer;
   white-space: nowrap;
 }
 .nav-cta:hover {
@@ -158,7 +143,7 @@ nav.scrolled {
 
 .hamburger {
   display: none; flex-direction: column; gap: 5px; padding: 8px;
-  cursor: none; margin-left: auto;
+  cursor: pointer; margin-left: auto;
 }
 .hamburger span {
   width: 24px; height: 1.5px; background: var(--white);
@@ -193,7 +178,7 @@ nav.scrolled {
   font-family: var(--font-head); font-weight: 700; font-size: 0.82rem;
   letter-spacing: 0.1em; text-transform: uppercase;
   padding: 14px 30px; border-radius: 4px;
-  transition: all 0.25s var(--ease); cursor: none;
+  transition: all 0.25s var(--ease); cursor: pointer;
   border: none; position: relative; overflow: hidden;
 }
 .btn::after {
@@ -336,7 +321,7 @@ nav.scrolled {
   box-shadow: 0 8px 32px rgba(31,173,85,0.45);
   animation: wa-breathe 3s ease-in-out infinite;
   transition: transform 0.2s var(--ease-back);
-  cursor: none;
+  cursor: pointer;
 }
 .wa-float:hover { transform: scale(1.14); }
 .wa-float svg { fill: white; width: 26px; height: 26px; }
@@ -353,9 +338,9 @@ nav.scrolled {
   width: 100%;
   overflow: hidden;
   background: var(--black);
-  margin-top: var(--nav-h);
+  margin-top: 0;
 }
-.hero-banner img {
+.hero-banner img, .hero-banner video {
   width: 100%;
   height: auto;
   display: block;
@@ -363,11 +348,24 @@ nav.scrolled {
   transform: scale(1.03);
   animation: heroZoom 14s ease-out forwards;
 }
-.hero-banner .banner-desktop { display: block; }
+.hero-banner .banner-desktop {
+  display: block;
+  height: auto;
+  object-fit: contain;
+  transform: none;
+  animation: none;
+}
 .hero-banner .banner-mobile  { display: none; }
 @media (max-width: 768px) {
+  .hero-banner { margin-top: var(--nav-h); }
   .hero-banner .banner-desktop { display: none; }
-  .hero-banner .banner-mobile  { display: block; }
+  .hero-banner .banner-mobile  {
+    display: block;
+    height: auto;
+    object-fit: contain;
+    transform: none;
+    animation: none;
+  }
 }
 @keyframes heroZoom {
   from { transform: scale(1.03); }
@@ -528,7 +526,7 @@ nav.scrolled {
   flex-direction: column;
   align-items: center;
   gap: 14px;
-  cursor: none;
+  cursor: pointer;
   transition:
     opacity 0.55s cubic-bezier(0.25, 1, 0.5, 1),
     transform 0.55s cubic-bezier(0.25, 1, 0.5, 1);
@@ -592,7 +590,7 @@ nav.scrolled {
   width: 6px; height: 6px; border-radius: 50%;
   background: var(--line); border: 1px solid rgba(255,255,255,0.15);
   transition: background 0.3s, width 0.3s;
-  cursor: none;
+  cursor: pointer;
 }
 .carousel-dot.active {
   background: var(--red);
@@ -800,7 +798,7 @@ nav.scrolled {
   font-family: var(--font-mono); font-size: 0.65rem;
   letter-spacing: 0.12em; text-transform: uppercase;
   color: var(--red); background: none; border: none;
-  padding: 0; cursor: none;
+  padding: 0; cursor: pointer;
   transition: color 0.2s, gap 0.2s;
   gap: 4px; margin-top: 14px;
 }
@@ -907,7 +905,7 @@ nav.scrolled {
   display: block;
   border-radius: 12px;
   overflow: hidden;
-  cursor: none;
+  cursor: pointer;
   position: relative;
 }
 .insta-reel-img {
@@ -966,7 +964,7 @@ nav.scrolled {
   display: block;
   border-radius: 12px;
   overflow: hidden;
-  cursor: none;
+  cursor: pointer;
   position: relative;
 }
 .insta-post-item img {
@@ -1010,7 +1008,7 @@ footer {
   width: 34px; height: 34px; border-radius: 4px;
   border: 1px solid var(--line);
   display: flex; align-items: center; justify-content: center;
-  color: var(--muted); cursor: none;
+  color: var(--muted); cursor: pointer;
   transition: border-color 0.2s, color 0.2s, background 0.2s;
 }
 .footer-social:hover { border-color: var(--red); color: var(--white); background: var(--red-dim); }
@@ -1021,7 +1019,7 @@ footer {
   font-family: var(--font-mono); font-size: 0.6rem;
   letter-spacing: 0.1em; color: var(--muted);
 }
-.footer-bottom a { color: var(--red); cursor: none; }
+.footer-bottom a { color: var(--red); cursor: pointer; }
 
 /* ═══════════════════════════════════════════════
    IMPORT PAGE
@@ -1083,13 +1081,13 @@ footer {
   background: rgba(212,0,31,0.06);
   box-shadow: 0 0 0 3px rgba(212,0,31,0.1);
 }
-.form-select { cursor: none; }
+.form-select { cursor: pointer; }
 .form-select option { background: var(--ink); }
 .form-textarea { resize: vertical; min-height: 110px; line-height: 1.6; }
 .form-upload {
   border: 1px dashed rgba(255,255,255,0.15);
   border-radius: 8px; padding: 36px;
-  text-align: center; cursor: none;
+  text-align: center; cursor: pointer;
   transition: border-color 0.2s, background 0.2s;
   margin-top: 8px;
 }
@@ -1591,15 +1589,9 @@ body::after {
   .why-split { grid-template-columns: 1fr; }
   .why-image-col { min-height: 320px; }
 }
-@media (hover: none) and (pointer: coarse) {
-  body { cursor: auto; }
-  .cursor, .cursor-ring { display: none; }
-  button, a, [role="button"] { cursor: pointer; }
-  .form-select, .form-upload { cursor: pointer; }
-}
 @media (max-width: 768px) {
-  :root { --nav-h: 68px; }
-  nav { padding: 0 20px; }
+  :root { --nav-h: 88px; }
+  nav { padding: 0 8px 0 18px; width: calc(100% - 24px); top: 12px; height: 60px; }
   .nav-links, .nav-cta { display: none; }
   .hamburger { display: flex; }
   .container { padding-left: 20px; padding-right: 20px; }
@@ -1677,7 +1669,7 @@ body::after {
   background: rgba(255,255,255,0.08);
   border: 1px solid rgba(255,255,255,0.15);
   border-radius: 6px;
-  padding: 10px 18px; cursor: none; margin-bottom: 20px;
+  padding: 10px 18px; cursor: pointer; margin-bottom: 20px;
   transition: color 0.2s, background 0.2s, border-color 0.2s;
 }
 .rims-back:hover { color: var(--white); background: rgba(255,255,255,0.13); border-color: rgba(255,255,255,0.3); }
@@ -1702,7 +1694,7 @@ body::after {
   overflow: hidden;
   background: var(--ink);
   border: 1px solid var(--line);
-  cursor: none;
+  cursor: pointer;
   transition: border-color 0.25s, transform 0.3s var(--ease), box-shadow 0.3s;
 }
 .rim-card:hover {
@@ -1981,10 +1973,6 @@ body::after {
 </head>
 <body>
 
-<!-- CURSOR -->
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-
 <!-- LOADER -->
 <div id="loader">
   <div class="loader-logo">
@@ -2035,8 +2023,12 @@ body::after {
 
   <!-- BANNER — Image only, no text -->
   <section class="hero-banner">
-    <img class="banner-desktop" src="banner4.png" alt="TIK — Premium Aftermarket Parts">
-    <img class="banner-mobile" src="bannermob.png" alt="TIK — Premium Aftermarket Parts">
+    <video class="banner-desktop" autoplay muted loop playsinline poster="banner-desktop-poster.jpg" aria-label="TIK — Premium Aftermarket Parts">
+      <source src="banner-desktop.mp4" type="video/mp4">
+    </video>
+    <video class="banner-mobile" autoplay muted loop playsinline poster="banner-mobile-poster.jpg" aria-label="TIK — Premium Aftermarket Parts">
+      <source src="banner-mobile.mp4" type="video/mp4">
+    </video>
   </section>
 
   <!-- MARQUEE -->
@@ -2575,33 +2567,6 @@ body::after {
 </div>
 
 <script>
-/* ─────────────────────────────────────────────
-   CUSTOM CURSOR
-───────────────────────────────────────────── */
-const cursor = document.getElementById('cursor');
-const cursorRing = document.getElementById('cursorRing');
-let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
-
-document.addEventListener('mousemove', e => {
-  mouseX = e.clientX; mouseY = e.clientY;
-  cursor.style.left = mouseX + 'px';
-  cursor.style.top = mouseY + 'px';
-});
-
-function animateRing() {
-  ringX += (mouseX - ringX) * 0.12;
-  ringY += (mouseY - ringY) * 0.12;
-  cursorRing.style.left = ringX + 'px';
-  cursorRing.style.top = ringY + 'px';
-  requestAnimationFrame(animateRing);
-}
-animateRing();
-
-document.querySelectorAll('a, button, [role="button"], .cat-card, .why-card, .testi-card').forEach(el => {
-  el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); cursorRing.classList.add('hover'); });
-  el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); cursorRing.classList.remove('hover'); });
-});
-
 function scrollToCarousel() {
   showPage('home');
   setTimeout(() => {
